@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.VaporDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorVapor"%>
 <html>
 
 <head>
@@ -136,50 +140,49 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro del funcionamiento del Sistema de Distribución de Vapor</h5>
+                        <h5>Registro del funcionamiento del Sistema de Distribuci&oacute;n de Vapor</h5>
                     </div>
                     <div class="ibox-content">
 
                         <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <table id="records_table" class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Válvula</th>
+                        <th>V&aacute;lvula</th>
                         <th>Estado</th>
                         <th>Flujo</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Temperatura</th>
                     </tr>
                     </thead>
                     <tbody>
-                        
+                    <%
+                    	ManejadorVapor manejadorVapor = new ManejadorVapor();
+                    	List<VaporDTO> lista= manejadorVapor.buscarEstadistica(7, 2015);
+                    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    	for(VaporDTO vapor: lista) {
+                    %>    
                     <tr>
-                        <td>10/07/2015 - 17.35</td>
-                        <td>CB 1</td>
-                        <td>Abierta</td>
-                        <td>10 l/min</td>
-                        <td>60 PSI</td>
-                        <td>100 °C</td>
+                        <td><%= format.format(vapor.getFecha()) %></td>
+                        <td><%= vapor.getValvula() %></td>
+                        <td><%= vapor.getEstado() %></td>
+                        <td><%= vapor.getFlujo() %> l/min</td>
+                        <td><%= vapor.getPresion() %> PSI</td>
+                        <td><%= vapor.getTemperatura() %> &#176; C</td>
                         
                     </tr>
-                    <tr>
-                        <td>10/07/2015 - 17.35</td>
-                        <td>Cocina</td>
-                        <td>Cerrada</td>
-                        <td>10 l/min</td>
-                        <td>60 PSI</td>
-                        <td>100 °C</td>
-                    </tr>
-                    
+                    <%
+                    	}
+                    %>
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Válvula</th>
+                        <th>V&aacute;lvula</th>
                         <th>Estado</th>
                         <th>Flujo</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Temperatura</th>
                         
                         
@@ -269,6 +272,7 @@
 
         }
     </script>
+
 <style>
     body.DTTT_Print {
         background: #fff;
