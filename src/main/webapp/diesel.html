@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DIESEL | HCAM</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/plugins/chartist/chartist.min.css" rel="stylesheet">
+    
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    <link href="css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+    <link href="css/plugins/cropper/cropper.min.css" rel="stylesheet">
+
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+
+    <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+    <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <link href="css/industrial.css" rel="stylesheet">
+
+</head>
+
+<body class="">
+
+    <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image"  src="images/logo%20IESS.png" width="52" height="98" />
+                             </span>
+                    </div>
+                    <div class="logo-element">
+                        HCAM
+                    </div>
+                </li>
+                
+                <li>
+                    <a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">Agua potable</span></a>
+                </li>
+                <li class="active">
+                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">Diesel</span></a>  
+                </li>
+                <li>
+                    <a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">Vapor</span> </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                </li>
+                <li>
+                    <a href="estadistica_diesel.html">
+                        <i class="fa fa-table"></i> Estadistica
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-sign-out"></i> Salir
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="wrapper wrapper-content">
+                
+                 <div class="row  border-bottom white-bg dashboard-header">
+
+                    <div class="col-sm-3">
+                        <h2>ALARMAS</h2>
+                    <div id="alarma" class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <i class="fa fa-warning fa-4x"></i>
+                            <h1 class="m-xs">Alarma</h1>
+                            <h3 class="font-bold no-margins">
+                                SISTEMA PARADO
+                            </h3>
+                            <small>SIN COMUNICACION</small>
+                        </div>
+                    </div>
+                        <small>Espacio para las alarmas</small>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <h2 align="center">FECHA, DIA, HORA</h2>
+                        <div class="ibox-content ibox-heading">
+                                    <h3>CUADRO DE DIALOGO</h3>
+                                    <small>INDICACIONES, PROCEDIMIENTOS, ETC VAN AQUI</small>
+                        </div>
+                        
+                        <div class="ibox-content">
+                                <h2>
+                                    Indicaciones aqui!!
+                                </h2>
+                        
+                            <p>
+                                indicaciones de cualquier tipo en esta parte de la pantalla
+                            </p>
+                            <p>
+                                procedimientos aqui
+                            </p>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        <h2>NOTIFICACIONES</h2>
+                        <div class="widget red-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-bell fa-4x"></i>
+                                <h1 class="m-xs">47</h1>
+                                <h3 class="font-bold no-margins">
+                                NOTIFICACION
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                        <small>Espacio para las notificaciones</small>
+                       
+                    </div>
+
+            </div>
+                 <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>TANQUE 1</h5>
+                                <div ibox-tools=""></div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="text-center"> <!--OJO-->
+                                <center><div class="industrial tank size four" id="tanque1"><span class="ticks" data-amount="6" data-scale-freq="1"></span>
+                                    <div class="space"></div>
+                                    <div class="meter"></div>
+                                    </div></center>
+                                    <h2 align="center" id="texto_tanque1"></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>TANQUE 2</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <center><div class="industrial tank size four" id="tanque2"><span class="ticks" data-amount="6" data-scale-freq="1"></span>
+                                    <div class="space"></div>
+                                    <div class="meter"></div>
+                                    </div></center>
+                                	<h2 align="center" id="texto_tanque2"></h2>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>BOMBA DE INGRESO</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <center><img id="bomba1" width="320" height="200" src="images/bomba_parada.png"></center>
+                                <h4 class="no-margins" id="texto_bomba1">APAGADA</h4><!--OJO-->
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>BOMBA DE SALIDA</h5>
+                            </div>
+                            <div class="ibox-content">
+                                
+                                <center><img id="bomba2" width="320" height="200" src="images/bomba_parada.png"></center>
+                                <h4 class="no-margins" id="texto_bomba2">APAGADA</h4><!--OJO-->
+                                
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-4"><!--COMPLETAR-->
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>TEMPERATURA DIESEL</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <center><div class="industrial thermometer size two" id="temperatura"><span class="ticks" data-amount="4" data-scale-freq="1"></span>
+                                    <div class="space"></div>
+                                    <div class="meter"></div>
+                                    </div></center>
+                                	<h2 align="center" id="texto_temperatura"></h2>
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="footer">
+                <div>
+                    <strong>Copyright</strong> ESCUELA POLITECNICA NACIONAL &copy; 2015
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    
+    <script src="js/industrial.js"></script>
+    
+    <script>
+    $("#alarma").hide();
+        
+    $(document).ready(function(){
+        setTimeout(function(){
+            $("#tanque1").industrial({
+                default_value: true,    //Strating value for component
+                low: 0,                 //Scale lower boundary
+                high: 6000,             //Scale upper boundary
+                tick_scale: false,      //Add numerical scales to tick marks?
+                tick_scale_frequency: 1,//Frequency of numerical scales
+                tick_amount: 0,         //Amount of tick marks on component
+                tick_height: 3,         //Percent height of each tick mark
+                digit_amount: 4,        //Amount of digital readout digits
+            });
+            $("#tanque2").industrial({
+                default_value: true,    //Strating value for component
+                low: 0,                 //Scale lower boundary
+                high: 6000,             //Scale upper boundary
+                tick_scale: false,      //Add numerical scales to tick marks?
+                tick_scale_frequency: 1,//Frequency of numerical scales
+                tick_amount: 0,         //Amount of tick marks on component
+                tick_height: 3,         //Percent height of each tick mark
+                digit_amount: 4,        //Amount of digital readout digits
+            });
+            $("#temperatura").industrial({
+                default_value: true,    //Strating value for component
+                low: 0,                 //Scale lower boundary
+                high: 60,             //Scale upper boundary
+                tick_scale: false,      //Add numerical scales to tick marks?
+                tick_scale_frequency: 1,//Frequency of numerical scales
+                tick_amount: 0,         //Amount of tick marks on component
+                tick_height: 3,         //Percent height of each tick mark
+                digit_amount: 4,        //Amount of digital readout digits
+            });
+        },250);
+    });
+        var refreshId = setInterval(function(){
+            actualizarTanques();
+            actualizarEstadoBombas();
+        },2000);
+        $.ajaxSetup({ cache: false });
+        
+        function actualizarTanques(){
+            $.get('ActualizarTanques',{"rand": Math.random()},
+                  function(resp) {  // on sucess
+                $.each(resp, function(nombre, valor){
+                    if (nombre=="acumuladoTanque1"){
+                        $("#texto_tanque1").html(valor + " Galones");
+                        $("#tanque1").industrial(valor);
+                    }
+                    if (nombre=="acumuladoTanque2"){
+                        $("#texto_tanque2").html(valor + " Galones");
+                        $("#tanque2").industrial(valor);
+                    }
+                    if (nombre=="temperatura"){
+                        $("#texto_temperatura").html(valor + "&#176; C");
+                        $("#temperatura").industrial(valor);
+                    }
+                    if (nombre == "alarma"){
+                        if (valor){
+                            $("#alarma").show();
+                        } else {
+                            $("#alarma").hide();
+                        }
+                    }
+                });
+            })
+            .fail(function(){   //on failure
+                alert("Fallo la peticion");
+            });
+        }
+        function actualizarEstadoBombas(){
+            $.get('ActualizarEstadoBombasDiesel', {"rand": Math.random()},
+                  function(resp) {  //on sucess
+                $.each(resp, function(nombre, valor) {
+                    if(nombre=="bomba1"){
+                        if (valor){
+                            $("#bomba1").attr("src","images/bomba_funcionando.gif");
+                            $("#texto_bomba1").html("FUNCIONANDO");
+                        } else {
+                            $("#bomba1").attr("src","images/bomba_parada.png");
+                            $("#texto_bomba1").html("APAGADA");
+                        }
+                    }
+                    if(nombre=="bomba2"){
+                        if (valor) {
+                            $("#bomba2").attr("src","images/bomba_funcionando.gif");
+                            $("#texto_bomba2").html("FUNCIONANDO");
+                        } else {
+                            $("#bomba2").attr("src","images/bomba_parada.png");
+                            $("#texto_bomba2").html("APAGADA");
+                        }
+                    }                    
+                });
+            })
+            .fail(function() {  //on failure
+                alert("Fallo la peticion");
+            });
+        }
+                              
+    </script>
+
+
+</body>
+
+</html>
