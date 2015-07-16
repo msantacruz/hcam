@@ -295,14 +295,14 @@
                 digit_amount: 4,        //Amount of digital readout digits
             });
             $("#temperatura").industrial({
-                default_value: true,    //Strating value for component
+                default_value: false,    //Strating value for component
                 low: 0,                 //Scale lower boundary
                 high: 60,               //Scale upper boundary
                 tick_scale: true,       //Add numerical scales to tick marks?
                 tick_scale_frequency: 1,//Frequency of numerical scales
-                tick_amount: 1,         //Amount of tick marks on component
+                tick_amount: 0,         //Amount of tick marks on component
                 tick_height: 1,         //Percent height of each tick mark
-                digit_amount: 5,        //Amount of digital readout digits
+                digit_amount: 1,        //Amount of digital readout digits
             });
         },250);
     });
