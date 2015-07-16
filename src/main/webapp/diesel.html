@@ -230,13 +230,13 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-lg-4"><!--COMPLETAR-->
+                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>TEMPERATURA DIESEL</h5>
                             </div>
                             <div class="ibox-content">
-                                <center><div class="industrial thermometer size two" id="temperatura"><span class="ticks" data-amount="4" data-scale-freq="1"></span>
+                                <center><div class="industrial thermometer size two" id="temperatura"><span class="ticks" data-amount="5" data-scale-freq="1"></span>
                                     <div class="space"></div>
                                     <div class="meter"></div>
                                     </div></center>
@@ -297,12 +297,12 @@
             $("#temperatura").industrial({
                 default_value: true,    //Strating value for component
                 low: 0,                 //Scale lower boundary
-                high: 60,             //Scale upper boundary
-                tick_scale: false,      //Add numerical scales to tick marks?
+                high: 60,               //Scale upper boundary
+                tick_scale: true,       //Add numerical scales to tick marks?
                 tick_scale_frequency: 1,//Frequency of numerical scales
-                tick_amount: 0,         //Amount of tick marks on component
-                tick_height: 3,         //Percent height of each tick mark
-                digit_amount: 4,        //Amount of digital readout digits
+                tick_amount: 1,         //Amount of tick marks on component
+                tick_height: 1,         //Percent height of each tick mark
+                digit_amount: 5,        //Amount of digital readout digits
             });
         },250);
     });
