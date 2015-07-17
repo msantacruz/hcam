@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorAgua"%>
 <html>
 
 <head>
@@ -73,7 +78,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span>
                 </li>
                 
                 <li>
@@ -86,27 +91,27 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Estadistica Sistema de Presión Constante</h2>
+                    <h2>Estadistica Sistema de Presi&oacute;n Constante</h2>
                 </div>
                
             </div>
         <div class="wrapper wrapper-content animated fadeInRight">
         
         	<div class="form-group">
-
-                                    <div class="col-lg-2"><select class="form-control m-b" name="account">
-                                        <option>Enero</option>
-                                        <option>Febrero</option>
-                                        <option>Marzo</option>
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                        <option>Junio</option>
-                                        <option>Julio</option>
-                                        <option>Agosto</option>
-                                        <option>Septiembre</option>
-                                        <option>Octubre</option>
-                                        <option>Noviembre</option>
-                                        <option>Diciembre</option>
+						<form>
+                                    <div class="col-lg-2"><select class="form-control m-b" name="mes" id="mes">
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
                                     </select>
 
                                         
@@ -115,20 +120,32 @@
                     
                
 
-                                    <div class="col-lg-2"><select class="form-control m-b" name="account">
-                                        <option>2015</option>
-                                        
+                                    <div class="col-lg-2"><select class="form-control m-b" name="anio" id="anio">
+                                    <%
+                                    	int anioActual = Calendar.getInstance().get(Calendar.YEAR);
+                                    
+                                    	for (int i=2015; i<=anioActual; i++) {
+                                    %>
+                                        <option><%=i%></option>
+                                    <%
+                                    	}
+                                    %>      
                                     </select>
 
                                         
                                     </div>
+                                    
+                                    <button class="btn btn-white" type="submit">Buscar</button>
+                          </form>
                 </div>
+                
+                
                 
             <div class="row">
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro del funcionamiento de bombas, alarmas, presión y flujo</h5>
+                        <h5>Registro del funcionamiento de bombas, alarmas, presi&oacute;n y flujo</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -137,7 +154,7 @@
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Flujo</th>
                         <th>Bomba 1</th>
                         <th>Bomba 2</th>
@@ -146,31 +163,44 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <%
+                    	
+	                	String mes = request.getParameter("mes");
+	            		if (mes == null) {
+	            			int mesAnt  = Calendar.getInstance().get(Calendar.MONTH);
+	            			mesAnt = mesAnt +1;
+	            			mes = String.valueOf(mesAnt);
+	            		}
+	            		
+	            		String anio = request.getParameter("anio");
+	            		if (anio == null) {
+	            			anio= String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+	            		}
+	            	
+	                    ManejadorAgua manejadorAgua = new ManejadorAgua();
+                    	List<AguaDTO> lista= manejadorAgua.buscarEstadistica(Integer.parseInt(mes), Integer.parseInt(anio));
+                    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    	for(AguaDTO agua: lista) {
+                    %> 
+                    <tr>
+                        <td><%= format.format(agua.getFecha()) %></td>
+                        <td><%= agua.getPresion() %> PSI</td>
+                        <td><%= agua.getFlujo() %> l/min</td>
+                        <td><%= agua.getBomba_1() %></td>
+                        <td><%= agua.getBomba_2() %></td>
+                        <td><%= agua.getBomba_3() %></td>
+                        <td><%= agua.getAlarma() %></td>
                         
-                    <tr>
-                        <td>10/07/2015 - 17.35</td>
-                        <td>103 PSI</td>
-                        <td>256 GPM</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>No Activa</td>
                     </tr>
-                    <tr>
-                        <td>10/07/2015 - 17.42</td>
-                        <td>103 PSI</td>
-                        <td>256 GPM</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>No Activa</td>
-                    </tr>
+                    <%
+                    	}
+                    %>       
                     
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Flujo</th>
                         <th>Bomba 1</th>
                         <th>Bomba 2</th>
@@ -186,6 +216,23 @@
                     </div>
                 </div>
             </div>
+            </div>
+            
+            <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Estadistica de Consumo</h5>   
+             		</div>
+                    <div class="ibox-content">
+                           <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-bar-chart"></div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
             </div>
            
         </div>
@@ -208,6 +255,13 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    
+     <!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
 
     <!-- Data Tables -->
     <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
@@ -221,7 +275,11 @@
 
     <!-- Page-Level Scripts -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function() {        	
+
+        	$("#mes").val(<%=mes%>).attr('selected', 'selected');
+        	$("#anio").val(<%=anio%>).attr('selected', 'selected');
+            
             $('.dataTables-example').dataTable({
                 responsive: true,
                 "dom": 'T<"clear">lfrtip',
@@ -250,7 +308,80 @@
                 "height": "100%"
             } );
 
+            $(function() {
+                var barOptions = {
+                    series: {
+                        bars: {
+                            show: true,
+                            barWidth: 0.6,
+                            fill: true,
+                            fillColor: {
+                                colors: [{
+                                    opacity: 0.8
+                                }, {
+                                    opacity: 0.8
+                                }]
+                            }
+                        }
+                    },
+                    xaxis: {
+                        tickDecimals: 0
+                    },
+                    colors: ["#1ab394"],
+                    grid: {
+                        color: "#999999",
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#D4D4D4",
+                        borderWidth:0
+                    },
+                    legend: {
+                        show: false
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "dia: %x, galones: %y"
+                    }
+                };
+                var barData = {
+                    label: "bar",
+                    data: [
+                        [1, 134],
+                        [2, 25],
+                        [3, 19],
+                        [4, 34],
+                        [5, 32],
+                        [6, 44],
+                        [7, 34],
+                        [8, 25],
+                        [9, 19],
+                        [10, 34],
+                        [11, 32],
+                        [12, 44],
+                        [13, 34],
+                        [14, 25],
+                        [15, 19],
+                        [16, 34],
+                        [17, 32],
+                        [18, 44],
+                        [19, 34],
+                        [20, 25],
+                        [21, 19],
+                        [22, 34],
+                        [23, 32],
+                        [24, 44],
+                        [25, 34],
+                        [26, 25],
+                        [27, 19],
+                        [28, 34],
+                        [29, 32],
+                        [30, 44],
+                        [31, 34]
+                    ]
+                };
+                $.plot($("#flot-bar-chart"), [barData], barOptions);
 
+            });
         });
 
         function fnClickAddRow() {

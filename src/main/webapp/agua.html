@@ -99,7 +99,7 @@
                     <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
                 </li>                
 				<li>
-                    <a href="estadistica_agua.html">
+                    <a href="estadistica_agua.jsp">
                         <i class="fa fa-table"></i> Estadistica
                     </a>
                 </li>
@@ -136,7 +136,7 @@
                         
                     </div>
                     <div class="col-sm-6">
-                        <h2 align="center">FECHA, DIA, HORA</h2>
+                        <h2 align="center" id="fecha"></h2>
                         <div class="ibox-content ibox-heading">
                                     <h3>CUADRO DE DIALOGO</h3>
                                     <small>INDICACIONES, PROCEDIMIENTOS, ETC VAN AQUI</small>
@@ -325,6 +325,7 @@
 		var refreshId = setInterval(function() {
 		      actualizarPresion();
 		      actualizarEstadoBombas();
+		      actualizarFecha();
 		   }, 2000);
 		   $.ajaxSetup({ cache: false });
 
@@ -394,6 +395,23 @@
 					       });
 								
 		}    
+
+		function actualizarFecha() {
+			var monthNames = [
+                "Enero", "Febrero", "Marzo",
+                "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre",
+                "Noviembre", "Diciembre"
+            ];
+
+            var date = new Date();
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+            var hour = date.getHours();
+            var minutes = date.getMinutes();
+            $("#fecha").html(day + "-" + monthNames[monthIndex] + "-" + year + " " + hour + ":" + minutes);
+		}
 	</script>
             
 </body>
