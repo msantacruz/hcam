@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorAgua"%>
 <html>
 
 <head>
@@ -73,7 +77,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span>
                 </li>
                 
                 <li>
@@ -86,7 +90,7 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Estadistica Sistema de Presión Constante</h2>
+                    <h2>Estadistica Sistema de Presi&oacute;n Constante</h2>
                 </div>
                
             </div>
@@ -122,13 +126,17 @@
 
                                         
                                     </div>
+                                    
+                                    <button class="btn btn-white" type="submit">Buscar</button>
                 </div>
+                
+                
                 
             <div class="row">
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro del funcionamiento de bombas, alarmas, presión y flujo</h5>
+                        <h5>Registro del funcionamiento de bombas, alarmas, presi&oacute;n y flujo</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -137,7 +145,7 @@
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Flujo</th>
                         <th>Bomba 1</th>
                         <th>Bomba 2</th>
@@ -146,31 +154,31 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <%
+                    	ManejadorAgua manejadorAgua = new ManejadorAgua();
+                    	List<AguaDTO> lista= manejadorAgua.buscarEstadistica(7, 2015);
+                    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    	for(AguaDTO agua: lista) {
+                    %> 
+                    <tr>
+                        <td><%= format.format(agua.getFecha()) %></td>
+                        <td><%= agua.getPresion() %> PSI</td>
+                        <td><%= agua.getFlujo() %> l/min</td>
+                        <td><%= agua.getBomba_1() %></td>
+                        <td><%= agua.getBomba_2() %></td>
+                        <td><%= agua.getBomba_3() %></td>
+                        <td><%= agua.getAlarma() %></td>
                         
-                    <tr>
-                        <td>10/07/2015 - 17.35</td>
-                        <td>103 PSI</td>
-                        <td>256 GPM</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>No Activa</td>
                     </tr>
-                    <tr>
-                        <td>10/07/2015 - 17.42</td>
-                        <td>103 PSI</td>
-                        <td>256 GPM</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>Activa</td>
-                        <td>No Activa</td>
-                    </tr>
+                    <%
+                    	}
+                    %>       
                     
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Presión</th>
+                        <th>Presi&oacute;n</th>
                         <th>Flujo</th>
                         <th>Bomba 1</th>
                         <th>Bomba 2</th>

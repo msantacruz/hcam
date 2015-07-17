@@ -130,6 +130,8 @@
 
                                         
                                     </div>
+                                    
+                                    <button class="btn btn-white" type="submit">Buscar</button>
                 </div>
            
             
