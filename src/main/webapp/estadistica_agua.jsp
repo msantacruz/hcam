@@ -217,6 +217,44 @@
                 </div>
             </div>
             </div>
+            
+            <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Estadistica de Consumo</h5>   
+             		</div>
+                    <div class="ibox-content">
+                           <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-bar-chart" style="padding: 0px; position: relative;">
+                                    <canvas class="flot-base" width="762" height="200" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 762px; height: 200px;"></canvas>
+                                        <div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">
+                                            <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 14px; text-align: center;">1</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 146px; text-align: center;">2</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 277px; text-align: center;">3</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 409px; text-align: center;">4</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 540px; text-align: center;">5</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 672px; text-align: center;">6</div>
+                                            </div>
+                                            <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 173px; left: 6px; text-align: right;">0</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 138px; left: 0px; text-align: right;">10</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 104px; left: 0px; text-align: right;">20</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 69px; left: 0px; text-align: right;">30</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 35px; left: 0px; text-align: right;">40</div>
+                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 1px; left: 0px; text-align: right;">50</div>
+                                            </div>
+                                        </div>
+                                    <canvas class="flot-overlay" width="762" height="200" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 762px; height: 200px;"></canvas>
+                               </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
            
         </div>
         <div class="footer">
@@ -238,6 +276,13 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    
+     <!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
 
     <!-- Data Tables -->
     <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
