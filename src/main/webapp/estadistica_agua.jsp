@@ -227,28 +227,7 @@
              		</div>
                     <div class="ibox-content">
                            <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-bar-chart" style="padding: 0px; position: relative;">
-                                    <canvas class="flot-base" width="762" height="200" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 762px; height: 200px;"></canvas>
-                                        <div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">
-                                            <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 14px; text-align: center;">1</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 146px; text-align: center;">2</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 277px; text-align: center;">3</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 409px; text-align: center;">4</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 540px; text-align: center;">5</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 108px; top: 185px; left: 672px; text-align: center;">6</div>
-                                            </div>
-                                            <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 173px; left: 6px; text-align: right;">0</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 138px; left: 0px; text-align: right;">10</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 104px; left: 0px; text-align: right;">20</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 69px; left: 0px; text-align: right;">30</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 35px; left: 0px; text-align: right;">40</div>
-                                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 1px; left: 0px; text-align: right;">50</div>
-                                            </div>
-                                        </div>
-                                    <canvas class="flot-overlay" width="762" height="200" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 762px; height: 200px;"></canvas>
-                               </div>
+                                <div class="flot-chart-content" id="flot-bar-chart"></div>
                             </div>
                     </div>
                 </div>
@@ -329,7 +308,80 @@
                 "height": "100%"
             } );
 
+            $(function() {
+                var barOptions = {
+                    series: {
+                        bars: {
+                            show: true,
+                            barWidth: 0.6,
+                            fill: true,
+                            fillColor: {
+                                colors: [{
+                                    opacity: 0.8
+                                }, {
+                                    opacity: 0.8
+                                }]
+                            }
+                        }
+                    },
+                    xaxis: {
+                        tickDecimals: 0
+                    },
+                    colors: ["#1ab394"],
+                    grid: {
+                        color: "#999999",
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#D4D4D4",
+                        borderWidth:0
+                    },
+                    legend: {
+                        show: false
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "dia: %x, galones: %y"
+                    }
+                };
+                var barData = {
+                    label: "bar",
+                    data: [
+                        [1, 134],
+                        [2, 25],
+                        [3, 19],
+                        [4, 34],
+                        [5, 32],
+                        [6, 44],
+                        [7, 34],
+                        [8, 25],
+                        [9, 19],
+                        [10, 34],
+                        [11, 32],
+                        [12, 44],
+                        [13, 34],
+                        [14, 25],
+                        [15, 19],
+                        [16, 34],
+                        [17, 32],
+                        [18, 44],
+                        [19, 34],
+                        [20, 25],
+                        [21, 19],
+                        [22, 34],
+                        [23, 32],
+                        [24, 44],
+                        [25, 34],
+                        [26, 25],
+                        [27, 19],
+                        [28, 34],
+                        [29, 32],
+                        [30, 44],
+                        [31, 34]
+                    ]
+                };
+                $.plot($("#flot-bar-chart"), [barData], barOptions);
 
+            });
         });
 
         function fnClickAddRow() {
