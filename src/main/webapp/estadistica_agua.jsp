@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
 <%@page import="java.util.List"%>
@@ -97,20 +98,20 @@
         <div class="wrapper wrapper-content animated fadeInRight">
         
         	<div class="form-group">
-
-                                    <div class="col-lg-2"><select class="form-control m-b" name="account">
-                                        <option>Enero</option>
-                                        <option>Febrero</option>
-                                        <option>Marzo</option>
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                        <option>Junio</option>
-                                        <option>Julio</option>
-                                        <option>Agosto</option>
-                                        <option>Septiembre</option>
-                                        <option>Octubre</option>
-                                        <option>Noviembre</option>
-                                        <option>Diciembre</option>
+						<form>
+                                    <div class="col-lg-2"><select class="form-control m-b" name="mes" id="mes">
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
                                     </select>
 
                                         
@@ -119,15 +120,23 @@
                     
                
 
-                                    <div class="col-lg-2"><select class="form-control m-b" name="account">
-                                        <option>2015</option>
-                                        
+                                    <div class="col-lg-2"><select class="form-control m-b" name="anio" id="anio">
+                                    <%
+                                    	int anioActual = Calendar.getInstance().get(Calendar.YEAR);
+                                    
+                                    	for (int i=2015; i<=anioActual; i++) {
+                                    %>
+                                        <option><%=i%></option>
+                                    <%
+                                    	}
+                                    %>      
                                     </select>
 
                                         
                                     </div>
                                     
                                     <button class="btn btn-white" type="submit">Buscar</button>
+                          </form>
                 </div>
                 
                 
@@ -155,8 +164,21 @@
                     </thead>
                     <tbody>
                     <%
-                    	ManejadorAgua manejadorAgua = new ManejadorAgua();
-                    	List<AguaDTO> lista= manejadorAgua.buscarEstadistica(7, 2015);
+                    	
+	                	String mes = request.getParameter("mes");
+	            		if (mes == null) {
+	            			int mesAnt  = Calendar.getInstance().get(Calendar.MONTH);
+	            			mesAnt = mesAnt +1;
+	            			mes = String.valueOf(mesAnt);
+	            		}
+	            		
+	            		String anio = request.getParameter("anio");
+	            		if (anio == null) {
+	            			anio= String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+	            		}
+	            	
+	                    ManejadorAgua manejadorAgua = new ManejadorAgua();
+                    	List<AguaDTO> lista= manejadorAgua.buscarEstadistica(Integer.parseInt(mes), Integer.parseInt(anio));
                     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     	for(AguaDTO agua: lista) {
                     %> 
@@ -229,7 +251,11 @@
 
     <!-- Page-Level Scripts -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function() {        	
+
+        	$("#mes").val(<%=mes%>).attr('selected', 'selected');
+        	$("#anio").val(<%=anio%>).attr('selected', 'selected');
+            
             $('.dataTables-example').dataTable({
                 responsive: true,
                 "dom": 'T<"clear">lfrtip',
