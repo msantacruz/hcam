@@ -21,7 +21,7 @@ public class ManejadorAgua {
 		try {
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from vapor where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
+					.prepareStatement("select * from agua where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
 			ps.setInt(1, anio);
 			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
