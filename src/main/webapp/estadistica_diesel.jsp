@@ -146,7 +146,26 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <%
+                    	ManejadorDiesel manejadorDiesel = new ManejadorDiesel();
+                    	List<MovimientoDieselDTO> lista= manejadorDiesel.buscarEstadistica(7, 2015);
+                    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    	for(MovimientoDieselDTO Diesel: lista) {
+                    %>    
+                    <tr>
+                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= diesel.getAcumuladoTanque1() %> GALONES</td>
+                        <td><%= diesel.getAcumuladoTanque2() %> GALONES</td>
+                        <td><%= diesel.getTotal() %> GALONES</td>
+                        <td><%= diesel.getDescarga() %> GALONES</td>
+                        <td><%= diesel.getTemperatura() %> &#176; C</td>
+                        <td><%= diesel.getSalida() %> GALONES</td>
+                        <td><%= diesel.getAlarma() %></td>
                         
+                    </tr>
+                    <%
+                    	}
+                    %>    
                     <tr>
                         <td>10/07/2015 - 17.35</td>
                         <td>2000 Gal</td>
