@@ -554,11 +554,11 @@
 
 .industrial.tank.size.two .tick > .scale,
 .industrial.thermometer.size.two .tick > .scale {
-	font-size: -webkit-calc(10pt * 2);
-	font-size: -moz-calc(10pt * 2);
-	font-size: -o-calc(10pt * 2);
-	font-size: -ms-calc(10pt * 2);
-	font-size: calc(10pt * 2);
+	font-size: -webkit-calc(5pt * 2);
+	font-size: -moz-calc(5pt * 2);
+	font-size: -o-calc(5pt * 2);
+	font-size: -ms-calc(5pt * 2);
+	font-size: calc(5pt * 2);
 }
 
 .industrial.tank.size.three .tick > .scale,
@@ -572,11 +572,11 @@
 
 .industrial.tank.size.four .tick > .scale,
 .industrial.thermometer.size.four .tick > .scale {
-	font-size: -webkit-calc(10pt * 4);
-	font-size: -moz-calc(10pt * 4);
-	font-size: -o-calc(10pt * 4);
-	font-size: -ms-calc(10pt * 4);
-	font-size: calc(10pt * 4);
+	font-size: -webkit-calc(5pt * 4);
+	font-size: -moz-calc(5pt * 4);
+	font-size: -o-calc(5pt * 4);
+	font-size: -ms-calc(5pt * 4);
+	font-size: calc(5pt * 4);
 }
 
 .industrial.led.size.one {
