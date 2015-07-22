@@ -2,6 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoAguaDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorAgua"%>
 <html>
@@ -346,37 +347,18 @@
                 var barData = {
                     label: "bar",
                     data: [
-                        [1, 134],
-                        [2, 25],
-                        [3, 19],
-                        [4, 34],
-                        [5, 32],
-                        [6, 44],
-                        [7, 34],
-                        [8, 25],
-                        [9, 19],
-                        [10, 34],
-                        [11, 32],
-                        [12, 44],
-                        [13, 34],
-                        [14, 25],
-                        [15, 19],
-                        [16, 34],
-                        [17, 32],
-                        [18, 44],
-                        [19, 34],
-                        [20, 25],
-                        [21, 19],
-                        [22, 34],
-                        [23, 32],
-                        [24, 44],
-                        [25, 34],
-                        [26, 25],
-                        [27, 19],
-                        [28, 34],
-                        [29, 32],
-                        [30, 44],
-                        [31, 34]
+							<%
+	
+								ManejadorAgua manejadorAguaConsumo = new ManejadorAgua();
+								List<ConsumoAguaDTO> listaConsumo= manejadorAguaConsumo.buscarEstadistica1(Integer.parseInt(mes), Integer.parseInt(anio));
+								SimpleDateFormat formato = new SimpleDateFormat("dd");
+								for(ConsumoAguaDTO consumo_agua: listaConsumo) {
+							%> 
+                        [<%= formato.format(consumo_agua.getFecha()) %>,<%=consumo_agua.getConsumo()%>],
+                        	<%
+		                    	}
+		                    %>  
+                        
                     ]
                 };
                 $.plot($("#flot-bar-chart"), [barData], barOptions);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.gob.iess.cuartomaquinas.dto.AguaDTO;
+import ec.gob.iess.cuartomaquinas.dto.ConsumoAguaDTO;
 
 
 public class ManejadorAgua {
@@ -15,7 +16,8 @@ public class ManejadorAgua {
 	public List<AguaDTO> buscarEstadistica(int mes, int anio) {
 
 		List<AguaDTO> lista = new ArrayList<AguaDTO>();
-
+		
+		
 		Connection conn = null;
 
 		try {
@@ -36,6 +38,7 @@ public class ManejadorAgua {
 				aguaDTO.setAlarma(rs.getString("alarma"));
 				lista.add(aguaDTO);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -46,6 +49,40 @@ public class ManejadorAgua {
 			}
 		}
 		return lista;
+	}
+	
+	
+	public List<ConsumoAguaDTO> buscarEstadistica1(int mes, int anio) {
+
+		List<ConsumoAguaDTO> listaConsumo = new ArrayList<ConsumoAguaDTO>();
+		
+		
+		Connection conn = null;
+
+		try {
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from consumo_agua where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ConsumoAguaDTO consumoAguaDTO = new ConsumoAguaDTO();
+				consumoAguaDTO.setFecha(rs.getTimestamp("fecha"));
+				consumoAguaDTO.setConsumo(rs.getDouble("consumo"));
+				listaConsumo.add(consumoAguaDTO);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaConsumo;
 	}
 
 }
