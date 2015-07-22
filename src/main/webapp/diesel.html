@@ -212,8 +212,10 @@
                             </div>
                             <div class="ibox-content">
                                 <center><img id="bomba1" width="320" height="200" src="images/bomba_parada.png"></center>
-                                <h4 class="no-margins" id="texto_bomba1">APAGADA</h4><!--OJO-->
-                                
+                               <center>
+                                <h4 class="no-margins" id="descarga"></h4><!--OJO-->
+                                <h5 class="no-margins" id="texto_bomba1">APAGADA</h5>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -225,8 +227,10 @@
                             <div class="ibox-content">
                                 
                                 <center><img id="bomba2" width="320" height="200" src="images/bomba_parada.png"></center>
-                                <h4 class="no-margins" id="texto_bomba2">APAGADA</h4><!--OJO-->
-                                
+                                <center>
+                                <h4 class="no-margins" id="salida"></h4><!--OJO-->
+                                <h5 class="no-margins" id="texto_bomba2">APAGADA</h5>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -328,6 +332,12 @@
                     if (nombre=="temperatura"){
                         $("#texto_temperatura").html(valor + "&#176; C");
                         $("#temperatura").industrial(valor);
+                    }
+                    if (nombre=="descarga"){
+                    	$("#descarga").html(valor + " Galones");
+                    }
+                    if (nombre=="salida"){
+                    	$("#salida").html(valor + " Galones");
                     }
                     if (nombre == "alarma"){
                         if (valor){
