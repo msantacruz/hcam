@@ -2,6 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorDiesel"%>
 <html>
@@ -343,7 +344,7 @@
             var barData = {
                 label: "bar",
                 data: [
-                    [1, 134],
+                    /*[1, 134],
                     [2, 25],
                     [3, 19],
                     [4, 34],
@@ -373,8 +374,20 @@
                     [28, 34],
                     [29, 32],
                     [30, 44],
-                    [31, 34]
-                ]
+                    [31, 34]*/
+              
+                    <%
+                	
+					ManejadorDiesel manejadorDieselConsumo = new ManejadorDiesel();
+					List<ConsumoDieselDTO> listaConsumo= manejadorDieselConsumo.buscarConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
+					SimpleDateFormat formato = new SimpleDateFormat("dd");
+					for(ConsumoDieselDTO consumo_diesel: listaConsumo) {
+				%> 
+            [<%= formato.format(consumo_diesel.getFecha()) %>,<%=consumo_diesel.getTotal()%>],
+            	<%
+                	}
+                %>  
+            ]
             };
             $.plot($("#flot-bar-chart"), [barData], barOptions);
 
