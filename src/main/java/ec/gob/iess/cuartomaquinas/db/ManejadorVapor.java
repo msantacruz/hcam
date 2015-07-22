@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.gob.iess.cuartomaquinas.dto.ConsumoVaporDTO;
 import ec.gob.iess.cuartomaquinas.dto.VaporDTO;
 
 public class ManejadorVapor {
@@ -44,6 +45,39 @@ public class ManejadorVapor {
 			}
 		}
 		return lista;
+	}
+	
+	public List<ConsumoVaporDTO> buscarEstadistica1(int mes, int anio) {
+
+		List<ConsumoVaporDTO> listaConsumo = new ArrayList<ConsumoVaporDTO>();
+		
+		
+		Connection conn = null;
+
+		try {
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from consumo_vapor where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ConsumoVaporDTO consumoVaporDTO = new ConsumoVaporDTO();
+				consumoVaporDTO.setFecha(rs.getTimestamp("fecha"));
+				consumoVaporDTO.setConsumo(rs.getDouble("consumo"));
+				listaConsumo.add(consumoVaporDTO);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaConsumo;
 	}
 
 }

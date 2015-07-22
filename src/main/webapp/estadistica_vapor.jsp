@@ -2,6 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.VaporDTO"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoVaporDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorVapor"%>
 <html>
@@ -218,6 +219,23 @@
                 </div>
             </div>
             </div>
+            
+            <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Estadistica de Consumo</h5>   
+             		</div>
+                    <div class="ibox-content">
+                           <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-bar-chart"></div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
            
         </div>
         <div class="footer">
@@ -239,6 +257,14 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    
+    <!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
+    
 
     <!-- Data Tables -->
     <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
@@ -287,6 +313,64 @@
 
 
         });
+
+        $(function() {
+            var barOptions = {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.8
+                            }, {
+                                opacity: 0.8
+                            }]
+                        }
+                    }
+                },
+                xaxis: {
+                    tickDecimals: 0
+                },
+                colors: ["#1ab394"],
+                grid: {
+                    color: "#999999",
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#D4D4D4",
+                    borderWidth:0
+                },
+                legend: {
+                    show: false
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "dia: %x, galones: %y"
+                }
+            };
+            var barData = {
+                label: "bar",
+                data: [
+						<%
+
+							ManejadorVapor manejadorVaporConsumo = new ManejadorVapor();
+							List<ConsumoVaporDTO> listaConsumo= manejadorVaporConsumo.buscarEstadistica1(Integer.parseInt(mes), Integer.parseInt(anio));
+							SimpleDateFormat formato = new SimpleDateFormat("dd");
+							for(ConsumoVaporDTO consumo_vapor: listaConsumo) {
+						%> 
+						[<%= formato.format(consumo_vapor.getFecha()) %>,<%=consumo_vapor.getConsumo()%>],
+						<%
+							}
+						%>  
+                ]
+            };
+            $.plot($("#flot-bar-chart"), [barData], barOptions);
+
+        });
+  
+
+        
 
         function fnClickAddRow() {
             $('#editable').dataTable().fnAddData( [
