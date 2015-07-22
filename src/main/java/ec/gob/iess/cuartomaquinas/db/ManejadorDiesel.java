@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO;
@@ -115,17 +117,27 @@ public class ManejadorDiesel {
 
 			try {
 				conn = GestorConexion.obtenerConexion();
-				PreparedStatement ps = conn
-						.prepareStatement("select * from movimiento_diesel_estadistica where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
-				ps.setInt(1, anio);
-				ps.setInt(2, mes);
-				ResultSet rs = ps.executeQuery();
-				if (rs.next()) {
-					ConsumoDieselDTO consumoDieselDTO = new ConsumoDieselDTO();
-					consumoDieselDTO.setFecha(rs.getTimestamp("fecha"));
-					consumoDieselDTO.setTotal(rs.getDouble("total"));
-					lista.add(consumoDieselDTO);
+
+				Calendar mycal = new GregorianCalendar(anio, mes, 1);
+
+				int diasDelMes = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+				
+				for(int i=1; i<+diasDelMes; i++) {
+					PreparedStatement ps = conn
+							.prepareStatement("select * from movimiento_diesel_estadistica where date_part('year',fecha) = ? "
+									+ " and date_part('month',fecha) = ? and date_part('day',fecha) = ? order by fecha desc limit 1");
+					ps.setInt(1, anio);
+					ps.setInt(2, mes);
+					ps.setInt(3, i);
+					ResultSet rs = ps.executeQuery();
+					if (rs.next()) {
+						ConsumoDieselDTO consumoDieselDTO = new ConsumoDieselDTO();
+						consumoDieselDTO.setFecha(rs.getTimestamp("fecha"));
+						consumoDieselDTO.setTotal(rs.getDouble("total"));
+						lista.add(consumoDieselDTO);
+					}	
 				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
