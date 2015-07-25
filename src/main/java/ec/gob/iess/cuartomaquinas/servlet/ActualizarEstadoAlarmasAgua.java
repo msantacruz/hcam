@@ -14,9 +14,9 @@ import ec.gob.iess.cuartomaquinas.db.ManejadorPresionConstante;
 import ec.gob.iess.cuartomaquinas.dto.TipoAlarmaAguaDTO;
 
 /**
- * Servlet implementation class ActualizarEstadoBombas
+ * Servlet implementation class ActualizarEstadoAlarmasAgua
  */
-@WebServlet("/ActualizarEstadoBombas")
+@WebServlet("/ActualizarEstadoAlarmasAgua")
 public class ActualizarEstadoAlarmasAgua extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

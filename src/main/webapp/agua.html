@@ -126,10 +126,10 @@
                         <div class="m-b-md">
                             <i class="fa fa-warning fa-4x"></i>
                             <h1 class="m-xs">Alarma</h1>
-                            <h3 class="font-bold no-margins">
-                                SISTEMA PARADO
+                            <h3 class="font-bold no-margins" id="texto_estado_alarma">
+                                FALLA DE SISTEMA
                             </h3>
-                            <small>SIN COMUNICACION</small>
+                            <small></small>
                         </div>
                     </div>
                         <small>Espacio para las alarmas</small>
@@ -326,6 +326,7 @@
 		      actualizarPresion();
 		      actualizarEstadoBombas();
 		      actualizarFecha();
+		      actualizarEstadoAlarmasAgua();
 		   }, 2000);
 		   $.ajaxSetup({ cache: false });
 
@@ -388,6 +389,38 @@
 								   $("#alarma").hide();
 							   }
 						   }
+					    });		
+		            })
+					 .fail(function() { // on failure
+					       	alert("Fallo la peticion");				
+					       });
+								
+		}    
+
+		function actualizarEstadoAlarmasAgua() {
+			$.get('ActualizarEstadoAlarmasAgua', {"rand": Math.random()},
+		            function(resp) { // on sucess
+	            		var ban = true;					
+						$.each(resp, function(nombre, valor) {
+					       if (nombre == "bajapresion") {
+						       if (valor) {
+						    	   $("#texto_estado_alarma").html("PRESION BAJA");
+						    	   ban = false;
+							   } else {
+								   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
+							   }
+						   }
+					       if (nombre == "altapresion") {
+						       if (ban) {
+						    	   if (valor) {
+							    	   $("#texto_estado_alarma").html("PRESION ALTA");
+								   } else {
+									   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
+								   }
+							   }						       
+						   }
+					       
+					       
 					    });		
 		            })
 					 .fail(function() { // on failure
