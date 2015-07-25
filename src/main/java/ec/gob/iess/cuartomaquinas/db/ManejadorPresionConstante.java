@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
 import ec.gob.iess.cuartomaquinas.dto.PresionFlujoDTO;
+import ec.gob.iess.cuartomaquinas.dto.TipoAlarmaAguaDTO;
 
 public class ManejadorPresionConstante {
 
@@ -63,4 +64,32 @@ public class ManejadorPresionConstante {
 		}
 		return estadoBombasDTO;
 	}
+
+
+public TipoAlarmaAguaDTO buscarUltimoValorTipoAlarma() {
+	TipoAlarmaAguaDTO tipoAlarmaAguaDTO = new TipoAlarmaAguaDTO();
+
+	Connection conn = null;
+
+	try {
+		conn = GestorConexion.obtenerConexion();
+		PreparedStatement ps = conn
+				.prepareStatement("select * from estado_bombas order by id desc limit 1");
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			tipoAlarmaAguaDTO.setBajapresion(rs.getBoolean("bajapresion"));
+			tipoAlarmaAguaDTO.setAltapresion(rs.getBoolean("altapresion"));
+
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	return tipoAlarmaAguaDTO;
+}
 }
