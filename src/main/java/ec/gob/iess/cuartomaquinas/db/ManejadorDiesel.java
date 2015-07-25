@@ -81,16 +81,16 @@ public class ManejadorDiesel {
 			try {
 				conn = GestorConexion.obtenerConexion();
 				PreparedStatement ps = conn
-						.prepareStatement("select * from movimiento_diesel_estadistica where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
+						.prepareStatement("select * from movimiento_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
 				ps.setInt(1, anio);
 				ps.setInt(2, mes);
 				ResultSet rs = ps.executeQuery();
-				if (rs.next()) {
+				while (rs.next()) {
 					EstadisticaMovimientoDieselDTO estadisticaMovimientoDieselDTO = new EstadisticaMovimientoDieselDTO();
 					estadisticaMovimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
 					estadisticaMovimientoDieselDTO.setAcumuladoTanque1(rs.getDouble("acumulado_tanque1"));
 					estadisticaMovimientoDieselDTO.setAcumuladoTanque2(rs.getDouble("acumulado_tanque2"));
-					estadisticaMovimientoDieselDTO.setTotal(rs.getDouble("Total"));
+					estadisticaMovimientoDieselDTO.setTotal(rs.getDouble("acumulado_tanque1") + rs.getDouble("acumulado_tanque2"));
 					estadisticaMovimientoDieselDTO.setDescarga(rs.getDouble("descarga"));
 					estadisticaMovimientoDieselDTO.setTemperatura(rs.getDouble("temperatura"));
 					estadisticaMovimientoDieselDTO.setSalida(rs.getDouble("salida"));
@@ -124,7 +124,7 @@ public class ManejadorDiesel {
 				
 				for(int i=1; i<+diasDelMes; i++) {
 					PreparedStatement ps = conn
-							.prepareStatement("select * from movimiento_diesel_estadistica where date_part('year',fecha) = ? "
+							.prepareStatement("select * from movimiento_diesel where date_part('year',fecha) = ? "
 									+ " and date_part('month',fecha) = ? and date_part('day',fecha) = ? order by fecha desc limit 1");
 					ps.setInt(1, anio);
 					ps.setInt(2, mes);
@@ -133,7 +133,7 @@ public class ManejadorDiesel {
 					if (rs.next()) {
 						ConsumoDieselDTO consumoDieselDTO = new ConsumoDieselDTO();
 						consumoDieselDTO.setFecha(rs.getTimestamp("fecha"));
-						consumoDieselDTO.setTotal(rs.getDouble("total"));
+						consumoDieselDTO.setTotal(rs.getDouble("acumulado_tanque1") + rs.getDouble("acumulado_tanque2"));
 						lista.add(consumoDieselDTO);
 					}	
 				}
