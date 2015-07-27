@@ -227,13 +227,59 @@
                         <h5>Estadistica de Consumo</h5>   
              		</div>
                     <div class="ibox-content">
-                           <div class="flot-chart">
+                           <div class="flot-chart">     
                                 <div class="flot-chart-content" id="flot-bar-chart"></div>
                             </div>
                     </div>
                 </div>
             </div>
             
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del consumo de agua</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorAgua manejadorAguaConsumoTabla = new ManejadorAgua();
+						List<ConsumoAguaDTO> listaConsumoTabla= manejadorAguaConsumoTabla.buscarEstadistica1(Integer.parseInt(mes), Integer.parseInt(anio));
+						SimpleDateFormat formatoTabla = new SimpleDateFormat("yyyy-MM-dd");
+						for(ConsumoAguaDTO consumo_agua: listaConsumoTabla) {                   		
+                    %> 
+                    <tr>
+                        <td><%= formatoTabla.format(consumo_agua.getFecha()) %></td>
+                        <td><%= consumo_agua.getConsumo() %> Gal</td>
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             </div>
            
         </div>
