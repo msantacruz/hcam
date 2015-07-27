@@ -233,7 +233,52 @@
             </div>
             
             </div>
-           
+                <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del Consumo de Diesel</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorDiesel manejadorDieselConsumoTabla = new ManejadorDiesel();
+						List<ConsumoDieselDTO> listaConsumoTabla= manejadorDieselConsumoTabla.buscarConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
+						SimpleDateFormat formatoTabla = new SimpleDateFormat("yyyy-MM-dd");
+						for(ConsumoDieselDTO consumo_diesel: listaConsumoTabla) {                 		
+                    %> 
+                    <tr>
+                        <td><%= formatoTabla.format(consumo_diesel.getFecha()) %></td>
+                        <td><%= consumo_diesel.getTotal() %> GALONES</td>
+
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
         <div class="footer">
             
@@ -344,38 +389,6 @@
             var barData = {
                 label: "bar",
                 data: [
-                    /*[1, 134],
-                    [2, 25],
-                    [3, 19],
-                    [4, 34],
-                    [5, 32],
-                    [6, 44],
-                    [7, 34],
-                    [8, 25],
-                    [9, 19],
-                    [10, 34],
-                    [11, 32],
-                    [12, 44],
-                    [13, 34],
-                    [14, 25],
-                    [15, 19],
-                    [16, 34],
-                    [17, 32],
-                    [18, 44],
-                    [19, 34],
-                    [20, 25],
-                    [21, 19],
-                    [22, 34],
-                    [23, 32],
-                    [24, 44],
-                    [25, 34],
-                    [26, 25],
-                    [27, 19],
-                    [28, 34],
-                    [29, 32],
-                    [30, 44],
-                    [31, 34]*/
-              
                     <%
                 	
 					ManejadorDiesel manejadorDieselConsumo = new ManejadorDiesel();
