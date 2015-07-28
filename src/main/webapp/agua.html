@@ -139,20 +139,15 @@
                         <h2 align="center" id="fecha"></h2>
                         <div class="ibox-content ibox-heading">
                                     <h3>CUADRO DE DIALOGO</h3>
-                                    <small>INDICACIONES, PROCEDIMIENTOS, ETC VAN AQUI</small>
+                                    <h3 id="texto_cuadro_dialogo">OPERACION NORMAL</h3>
+                         
                         </div>
                         
                         <div class="ibox-content">
-                                <h2>
-                                    Indicaciones aqui!!
-                                </h2>
+                                <h3>INDICACIONES</h3>
                         
-                            <p>
-                                indicaciones de cualquier tipo en esta parte de la pantalla
-                            </p>
-                            <p>
-                                procedimientos aqui
-                            </p>
+                            <h3 id="texto_indicacion_alarma"></h3>
+                            <p></p>
                             
                         </div>
                         
@@ -160,14 +155,14 @@
                     </div>
                     <div class="col-sm-3">
                         <h2>NOTIFICACIONES</h2>
-                        <div class="widget yellow-bg p-lg text-center">
+                        <div id="notificacion" class="widget yellow-bg p-lg text-center">
                             <div class="m-b-md">
                                 <i class="fa fa-bell fa-4x"></i>
                                 <h1 class="m-xs">47</h1>
                                 <h3 class="font-bold no-margins">
-                                NOTIFICACION
+                                NOTIFICACIONES
                                 </h3>
-                                <small>We detect the error.</small>
+                                <small>SISTEMA SIN CONEXION</small>
                             </div>
                         </div>
                         <small>Espacio para las notificaciones</small>
@@ -294,6 +289,8 @@
     
      <script>
 
+     var banAlarmas = false;
+
      $(document).ready(function() {
     	 setTimeout(function() {
 	    	 $("#flujo").industrial({
@@ -321,14 +318,21 @@
 	   	});
 
 		$("#alarma").hide();
+		$("#notificacion").hide();
 		
 		var refreshId = setInterval(function() {
 		      actualizarPresion();
-		      actualizarEstadoBombas();
-		      actualizarFecha();
+		      console.log(banAlarmas)
 		      actualizarEstadoAlarmasAgua();
+		      console.log(banAlarmas)
+		      actualizarEstadoBombas();
+		      console.log(banAlarmas)
+		      actualizarFecha();
+		      banAlarmas = false;
+		      
 		   }, 2000);
 		   $.ajaxSetup({ cache: false });
+		   
 
 		function actualizarPresion() {
 			$.get('ActualizarPresion', {"rand": Math.random()},
@@ -353,7 +357,7 @@
 
 		function actualizarEstadoBombas() {
 			$.get('ActualizarEstadoBombas', {"rand": Math.random()},
-		            function(resp) { // on sucess					
+		            function(resp) { // on sucess				
 						$.each(resp, function(nombre, valor) {
 					       if (nombre == "bomba1") {
 						       if (valor) {
@@ -384,9 +388,23 @@
 						   }
 					       if (nombre == "alarma") {
 						       if (valor) {
+
+						    	   
 						    	   $("#alarma").show();
+
+						    	   if (!banAlarmas) {
+						    	   $("#texto_cuadro_dialogo").html("!!FALLA DEL SISTEMA!!");
+						    	   $("#texto_indicacion_alarma").html("Reinicie el sistema");
+						    	   }
+						    	   
+						    	   
+						    	   
+						    	   
 							   } else {
 								   $("#alarma").hide();
+								   $("#texto_cuadro_dialogo").html("OPERACION NORMAL");
+						    	   $("#texto_indicacion_alarma").html(" ");
+								  
 							   }
 						   }
 					    });		
@@ -400,22 +418,33 @@
 		function actualizarEstadoAlarmasAgua() {
 			$.get('ActualizarEstadoAlarmasAgua', {"rand": Math.random()},
 		            function(resp) { // on sucess
-	            		var ban = true;					
+						
+						var ban = true;					
 						$.each(resp, function(nombre, valor) {
 					       if (nombre == "bajapresion") {
 						       if (valor) {
+						    	   
+						    	   banAlarmas = true;
 						    	   $("#texto_estado_alarma").html("PRESION BAJA");
+						    	   $("#texto_cuadro_dialogo").html("!!PRESION BAJA!!");
+						    	   $("#texto_indicacion_alarma").html("Revise las válvulas de alimención de agua, Verifique el estado de las bombas");
 						    	   ban = false;
 							   } else {
 								   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
+								  
+								  
 							   }
 						   }
 					       if (nombre == "altapresion") {
 						       if (ban) {
 						    	   if (valor) {
+						    		   banAlarmas = true;
 							    	   $("#texto_estado_alarma").html("PRESION ALTA");
+							    	   $("#texto_cuadro_dialogo").html("!!PRESION ALTA!!");
+							    	   $("#texto_indicacion_alarma").html("Cierre la válvula de alimentación de agua, Abra la válvula de paso al hospital");
 								   } else {
 									   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
+									
 								   }
 							   }						       
 						   }
