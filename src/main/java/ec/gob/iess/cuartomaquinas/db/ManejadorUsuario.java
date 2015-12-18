@@ -9,10 +9,10 @@ public class ManejadorUsuario {
 
 	public boolean validarUsuario(String usuario, String clave) {
 		Connection conn = null;
-
+		PreparedStatement ps = null;
 		try {
 			conn = GestorConexion.obtenerConexion();
-			PreparedStatement ps = conn
+			ps = conn
 					.prepareStatement("select * from usuario where nombre=?");
 			ps.setString(1, usuario);
 			ResultSet rs = ps.executeQuery();
@@ -29,11 +29,14 @@ public class ManejadorUsuario {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e1) {}
+			if (conn!=null)
+				try {
+					conn.close();
+				} catch (SQLException e) {	}
 		}
 		return false;
 	}

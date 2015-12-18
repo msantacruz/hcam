@@ -1,9 +1,12 @@
 package ec.gob.iess.cuartomaquinas.dto;
 
+import java.sql.Timestamp;
+
 public class PresionFlujoDTO {
 
 	private String presion;
 	private String flujo;
+	private Timestamp fecha;
 	
 	public String getPresion() {
 		return presion.trim();
@@ -16,5 +19,11 @@ public class PresionFlujoDTO {
 	}
 	public void setFlujo(String flujo) {
 		this.flujo = flujo;
+	}
+	public Timestamp getFecha() {
+		return fecha;
+	}
+	public void setFecha(Timestamp fecha) {
+		this.fecha = fecha;
 	}	
 }

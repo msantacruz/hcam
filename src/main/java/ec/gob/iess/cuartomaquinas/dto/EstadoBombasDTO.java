@@ -1,11 +1,16 @@
 package ec.gob.iess.cuartomaquinas.dto;
 
+import java.sql.Timestamp;
+
 public class EstadoBombasDTO {
 	
 	private boolean bomba1;
 	private boolean bomba2;
 	private boolean bomba3;
 	private boolean alarma;
+	private boolean altaPresion;
+	private boolean bajaPresion;
+	private Timestamp fecha;
 	
 	public boolean isBomba1() {
 		return bomba1;
@@ -30,5 +35,23 @@ public class EstadoBombasDTO {
 	}
 	public void setAlarma(boolean alarma) {
 		this.alarma = alarma;
+	}
+	public boolean isAltaPresion() {
+		return altaPresion;
+	}
+	public void setAltaPresion(boolean altaPresion) {
+		this.altaPresion = altaPresion;
+	}
+	public boolean isBajaPresion() {
+		return bajaPresion;
+	}
+	public void setBajaPresion(boolean bajaPresion) {
+		this.bajaPresion = bajaPresion;
+	}
+	public Timestamp getFecha() {
+		return fecha;
+	}
+	public void setFecha(Timestamp fecha) {
+		this.fecha = fecha;
 	}
 }
