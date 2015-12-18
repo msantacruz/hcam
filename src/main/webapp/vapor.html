@@ -29,7 +29,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" img src="images/logo%20IESS.png" width="52" height="98"/>
+                            <img alt="image" src="images/logo%20IESS.png" width="52" height="98"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">HCAM</strong>
@@ -49,7 +49,7 @@
                     <a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">AGUA POTABLE</span></a>
                 </li>
                 <li>
-                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DIESEL</span></a>
+                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DI&Eacute;SEL</span></a>
                 </li>
                 <li class="active">
                     <a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">VAPOR</span></a>
@@ -69,11 +69,11 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span>
                 </li>
                 <li>
                     <a href="estadistica_vapor.jsp">
-                        <i class="fa fa-table"></i> Estadistica
+                        <i class="fa fa-table"></i> Estad&iacute;stica
                     </a>
                 </li>
 
@@ -95,14 +95,14 @@
 
                     <div class="col-sm-3">
                         <h2>ALARMAS</h2>
-                    <div class="widget red-bg p-lg text-center">
+                    <div id="alarma" class="widget red-bg p-lg text-center">
                         <div class="m-b-md">
                             <i class="fa fa-warning fa-4x"></i>
                             <h1 class="m-xs">Alarma</h1>
-                            <h3 class="font-bold no-margins">
-                                SISTEMA PARADO
+                            <h3 class="font-bold no-margins" id="texto_estado_alarma">
+                                FALLA DE SISTEMA
                             </h3>
-                            <small>SIN COMUNICACION</small>
+                            <small></small>
                         </div>
                     </div>
                         <small>Espacio para las alarmas</small>
@@ -112,20 +112,15 @@
                         <h2 align="center" id="fecha"></h2>
                         <div class="ibox-content ibox-heading">
                                     <h3>CUADRO DE DIALOGO</h3>
-                                    <small>INDICACIONES, PROCEDIMIENTOS, ETC VAN AQUI</small>
+                                    <h3 id="texto_cuadro_dialogo">OPERACI&Oacute;N NORMAL</h3>
                         </div>
                         
                         <div class="ibox-content">
-                                <h2>
-                                    Indicaciones aqui!!
-                                </h2>
-                        
-                            <p>
-                                indicaciones de cualquier tipo en esta parte de la pantalla
-                            </p>
-                            <p>
-                                procedimientos aqui
-                            </p>
+                                <h3>
+                                    INDICACIONES
+                                </h3>
+                                <h3 id="texto_indicacion_alarma"></h3>
+                                <p></p>
                             
                         </div>
                         
@@ -133,14 +128,14 @@
                     </div>
                     <div class="col-sm-3">
                         <h2>NOTIFICACIONES</h2>
-                        <div class="widget yellow-bg p-lg text-center">
+                        <div id="notificacion" class="widget yellow-bg p-lg text-center">
                             <div class="m-b-md">
                                 <i class="fa fa-bell fa-4x"></i>
-                                <h1 class="m-xs">nueva</h1>
+                                <h1 class="m-xs">47</h1>
                                 <h3 class="font-bold no-margins">
-                                NOTIFICACION
+                                NOTIFICACI&Oacute;N
                                 </h3>
-                                <small>Puerta abierta</small>
+                                <small>SISTEMA SIN CONEXI&Oacute;N</small>
                             </div>
                         </div>
                         <small>Espacio para las notificaciones</small>
@@ -158,12 +153,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img  src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>De acuerdo al horario de operacion del Caldero</p>
+                            <p>De acuerdo al horario de operaci&oacute;n del Caldero</p>
                             </br>
                             </br>
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Ingreso de Vapor 6"</small>
                             
                         </div>
@@ -179,8 +175,9 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Lunes - Viernes </br> Desde 6:00 Hasta 19:00 </br>  Sabado - Domingo - Feriados </br> Desde 6:00 Hasta 16:00</p>
-                            <h3>Flujo = 20 l/min</h3>
+                            <p>Lunes - Viernes </br> Desde 6:00 Hasta 19:00 </br>  S&aacute;bado - Domingo - Feriados </br> Desde 6:00 Hasta 16:00</p>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -194,10 +191,11 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 19:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 19:00</p>
                             </br>
                             </br>                        
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -212,10 +210,11 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 00:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -230,10 +229,11 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 00:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -248,10 +248,11 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 00:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -267,10 +268,11 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 15:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 15:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 1 1/2"</small>
                         </div>
                     </div>
@@ -279,16 +281,17 @@
                 <div class="col-md-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Quirofano - Sala Partos</h5>
+                            <h5>Quir&oacute;fano - Sala Partos</h5>
                         </div>
                     
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 00:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -297,16 +300,17 @@
                 <div class="col-md-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Lavanderia - Comedor</h5>
+                            <h5>Lavander&iacute;a - Comedor</h5>
                         </div>
                     
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 6:00 Hasta 00:00</p>
+                            <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -315,14 +319,15 @@
                 <div class="col-md-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Lavanderia</h5>
+                            <h5>Lavander&iacute;a</h5>
                         </div>
                     
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Lunes - Viernes </br> Desde 7:00 Hasta 19:00 </br>  Sabado - Domingo - Feriados </br> Desde 7:00 Hasta 13:00</p>
-                            <h3>Flujo = 20 l/min</h3>
+                            <p>Lunes - Viernes </br> Desde 7:00 Hasta 19:00 </br>  S&aacute;bado - Domingo - Feriados </br> Desde 7:00 Hasta 13:00</p>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -337,10 +342,9 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>De acuerdo al horario de operacion de los Calderos</p>
-                            </br>
-                            </br>
-                            <h3>Flujo = 20 l/min</h3>
+                            <p>De acuerdo al horario de operaci&oacute;n de los Calderos</p>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Ingreso de Vapor 6"</small>
                         </div>
                     </div>
@@ -355,10 +359,9 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>De acuerdo al horario de operacion de los Calderos</p>
-                            </br>
-                            </br>
-                            <h3>Flujo = 20 l/min</h3>
+                            <p>De acuerdo al horario de operaci&oacute;n de los Calderos</p>
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Ingreso de Vapor 6"</small>
                         </div>
                     </div>
@@ -374,11 +377,25 @@
                         <div class="ibox-content">
                             <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
-                            <p>Todos los Dias </br> Desde 7:00 Hasta 23:00</p>
-                            </br>
-                            </br> 
-                            <h3>Flujo = 20 l/min</h3>
+                            <p>Todos los D&iacute;as </br> Desde 7:00 Hasta 23:00</p> 
+                            <h3>Flujo = 20 Kg/h</h3>
+                            <h3>Presi&oacute;n = 20 PSI</h3>
                             <small>Salida de Vapor 2"</small>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-md-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                        
+                            <h5>Purga Condensado</h5>
+
+                        </div>
+                    
+                        <div class="ibox-content">
+                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <small>Salida de Condensado 1"</small>
+                            
                         </div>
                     </div>
                 </div> 
@@ -419,7 +436,7 @@
                 <div class="col-md-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                         <h5>Presion</h5>
+                         <h5>Presi&oacute;n</h5>
                         </div>
                             
                         <div class="ibox-content">
@@ -434,10 +451,10 @@
                             </br>
                             </br>
                             </br>
-                            <h4>Presión = 100 PSI</h4>
+                            <h4>Presi&oacute;n = 100 PSI</h4>
                             </br>
                             </br>
-                            <small>Presion del distribuidor de vapor.</small>
+                            <small>Presi&oacute;n del distribuidor de vapor.</small>
                             
                             
                         </div>
@@ -453,7 +470,7 @@
             <div class="footer">
                 
                 <div>
-                    <strong>Copyright</strong> Escuela Politecnica Nacional - FIEE &copy; 2014-2015
+                    <strong>Copyright</strong> Escuela Polit&eacute;cnica Nacional - FIEE &copy; 2014-2015
                 </div>
             </div>
 

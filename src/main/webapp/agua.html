@@ -76,7 +76,7 @@
                     <a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">AGUA POTABLE</span></a>
                 </li>
                 <li>
-                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DIESEL</span></a>
+                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DI&Eacute;SEL</span></a>
                 </li>
                 <li>
                     <a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">VAPOR</span></a>
@@ -96,11 +96,11 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span>
                 </li>                
 				<li>
                     <a href="estadistica_agua.jsp">
-                        <i class="fa fa-table"></i> Estadistica
+                        <i class="fa fa-table"></i> Estad&iacute;stica
                     </a>
                 </li>
                 <li>
@@ -139,7 +139,7 @@
                         <h2 align="center" id="fecha"></h2>
                         <div class="ibox-content ibox-heading">
                                     <h3>CUADRO DE DIALOGO</h3>
-                                    <h3 id="texto_cuadro_dialogo">OPERACION NORMAL</h3>
+                                    <h3 id="texto_cuadro_dialogo">OPERACI&Oacute;N NORMAL</h3>
                          
                         </div>
                         
@@ -218,7 +218,7 @@
                 <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Presion - PSI</h5>
+                            <h5>Presi&oacute;n - PSI</h5>
 
                             <div ibox-tools=""></div>
                         </div>
@@ -257,7 +257,7 @@
             <div class="footer">
                 
                 <div>
-                    <strong>Copyright</strong> Escuela Politecnica Nacional - FIEE &copy; 2014-2015
+                    <strong>Copyright</strong> Escuela Polit&eacute;cnica Nacional - FIEE &copy; 2014-2015
                 </div>
             </div>
             
@@ -402,7 +402,7 @@
 						    	   
 							   } else {
 								   $("#alarma").hide();
-								   $("#texto_cuadro_dialogo").html("OPERACION NORMAL");
+								   $("#texto_cuadro_dialogo").html("OPERACI&Oacute;N NORMAL");
 						    	   $("#texto_indicacion_alarma").html(" ");
 								  
 							   }
@@ -410,7 +410,7 @@
 					    });		
 		            })
 					 .fail(function() { // on failure
-					       	alert("Fallo la peticion");				
+					       	alert("Fall&oacute; la petici&oacute;n");				
 					       });
 								
 		}    
@@ -425,9 +425,9 @@
 						       if (valor) {
 						    	   
 						    	   banAlarmas = true;
-						    	   $("#texto_estado_alarma").html("PRESION BAJA");
-						    	   $("#texto_cuadro_dialogo").html("!!PRESION BAJA!!");
-						    	   $("#texto_indicacion_alarma").html("Revise las válvulas de alimención de agua, Verifique el estado de las bombas");
+						    	   $("#texto_estado_alarma").html("PRESI&Oacute;N BAJA");
+						    	   $("#texto_cuadro_dialogo").html("!!PRESI&Oacute;N BAJA!!");
+						    	   $("#texto_indicacion_alarma").html("Revise las v&aacute;lvulas de alimenci&oacute;n de agua, Verifique el estado de las bombas");
 						    	   ban = false;
 							   } else {
 								   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
@@ -439,9 +439,9 @@
 						       if (ban) {
 						    	   if (valor) {
 						    		   banAlarmas = true;
-							    	   $("#texto_estado_alarma").html("PRESION ALTA");
-							    	   $("#texto_cuadro_dialogo").html("!!PRESION ALTA!!");
-							    	   $("#texto_indicacion_alarma").html("Cierre la válvula de alimentación de agua, Abra la válvula de paso al hospital");
+							    	   $("#texto_estado_alarma").html("PRESI&Oacute;N ALTA");
+							    	   $("#texto_cuadro_dialogo").html("!!PRESI&Oacute;N ALTA!!");
+							    	   $("#texto_indicacion_alarma").html("Cierre la v&aacute;lvula de alimentaci&oacute;n de agua, Abra la v&aacute;lvula de paso al hospital");
 								   } else {
 									   $("#texto_estado_alarma").html("FALLA DE SISTEMA");
 									
@@ -453,7 +453,7 @@
 					    });		
 		            })
 					 .fail(function() { // on failure
-					       	alert("Fallo la peticion");				
+					       	alert("Fall&oacute; la petici&oacute;n");				
 					       });
 								
 		}    

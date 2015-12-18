@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DIESEL | HCAM</title>
+<title>Di&eacute;sel | HCAM</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -77,12 +77,9 @@
 						<div class="logo-element">HCAM</div>
 					</li>
 
-					<li><a href="agua.html"><i class="fa fa-tint"></i> <span
-							class="nav-label">AGUA POTABLE</span></a></li>
-					<li class="active"><a href="diesel.html"><i
-							class="fa fa-truck"></i> <span class="nav-label">DIESEL</span></a></li>
-					<li><a href="vapor.html"><i class="fa fa-fire"></i> <span
-							class="nav-label">VAPOR</span> </a></li>
+					<li><a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">AGUA POTABLE</span></a></li>
+					<li class="active"><a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DI&Eacute;SEL</span></a></li>
+					<li><a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">VAPOR</span> </a></li>
 				</ul>
 
 			</div>
@@ -97,10 +94,9 @@
 							href="#"><i class="fa fa-bars"></i> </a>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li><span class="m-r-sm text-muted welcome-message">Monitoreo
-								Casa de Maquinas</span></li>
+						<li><span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span></li>
 						<li><a href="estadistica_diesel.jsp"> <i
-								class="fa fa-table"></i> Estadistica
+								class="fa fa-table"></i> Estad&iacute;stica
 						</a></li>
 						<li><a href="index.html"> <i class="fa fa-sign-out"></i>
 								Salir
@@ -131,7 +127,7 @@
 						<h2 align="center" id="fecha"></h2>
 						<div class="ibox-content ibox-heading">
 							<h3>CUADRO DE DIALOGO</h3>
-							<h3 id="texto_cuadro_dialogo">OPERACION NORMAL</h3>
+							<h3 id="texto_cuadro_dialogo">OPERACI&Oacute;N NORMAL</h3>
 						</div>
 
 						<div class="ibox-content">
@@ -146,12 +142,12 @@
 					</div>
 					<div class="col-sm-3">
 						<h2>NOTIFICACIONES</h2>
-						<div class="widget yellow-bg p-lg text-center">
+						<div id="notificacion" class="widget yellow-bg p-lg text-center">
 							<div class="m-b-md">
 								<i class="fa fa-bell fa-4x"></i>
 								<h1 class="m-xs">47</h1>
-								<h3 class="font-bold no-margins">NOTIFICACION</h3>
-								<small>We detect the error.</small>
+								<h3 class="font-bold no-margins">NOTIFICACI&iacute;N</h3>
+								<small>SISTEMA SIN CONEXI&Oacute;N</small>
 							</div>
 						</div>
 						<small>Espacio para las notificaciones</small>
@@ -229,8 +225,7 @@
 							<div class="ibox-content">
 
 								<center>
-									<img id="bomba2" width="320" height="200"
-										src="images/bomba_parada.png">
+									<img id="bomba2" width="320" height="200" src="images/bomba_parada.png">
 								</center>
 								<center>
 									<h4 class="no-margins" id="salida"></h4>
@@ -243,7 +238,7 @@
 					<div class="col-lg-4">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>TEMPERATURA DIESEL</h5>
+								<h5>TEMPERATURA DI&Eacute;SEL</h5>
 							</div>
 							<div class="ibox-content">
 								<center>
@@ -263,13 +258,14 @@
 			</div>
 			<div class="footer">
 				<div>
-					<strong>Copyright</strong> ESCUELA POLITECNICA NACIONAL &copy; 2015
+					<strong>Copyright</strong> Escuela Polit&eacute;cnica Nacional - FIEE &copy; 2014-2015
 				</div>
 			</div>
 
 		</div>
 	</div>
-
+	<!-- Chartist -->
+	<script src="js/plugins/chartist/chartist.min.js"></script>
 	<!-- Mainly scripts -->
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -330,9 +326,7 @@
 			actualizarFecha();
 			banAlarmas = false;
 		}, 2000);
-		$.ajaxSetup({
-			cache : false
-		});
+		$.ajaxSetup({ cache : false	});
 
 		function actualizarTanques() {
 			$.get('ActualizarTanques', {
@@ -369,7 +363,7 @@
 					}
 				});
 			}).fail(function() { //on failure
-				alert("Fallo la peticion");
+				alert("Fall&oacute; la petici&oacute;n");
 			});
 		}
 		function actualizarEstadoBombas() {
@@ -404,7 +398,7 @@
 							}
 						});
 					}).fail(function() { //on failure
-				alert("Fallo la peticion");
+				alert("Fall&oacute; la petici&oacute;n");
 			});
 		}
 

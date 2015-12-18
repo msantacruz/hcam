@@ -9,6 +9,7 @@ import java.util.List;
 
 import ec.gob.iess.cuartomaquinas.dto.AguaDTO;
 import ec.gob.iess.cuartomaquinas.dto.ConsumoAguaDTO;
+import ec.gob.iess.cuartomaquinas.dto.ConsumoMesAguaDTO;
 
 
 public class ManejadorAgua {
@@ -84,5 +85,33 @@ public class ManejadorAgua {
 		}
 		return listaConsumo;
 	}
-
+	
+	public List<ConsumoMesAguaDTO> buscarEstadistica2 (int mes, int anio){
+		   List<ConsumoMesAguaDTO> listaConsumoMes = new ArrayList<ConsumoMesAguaDTO> ();
+		   Connection conn = null;
+		try{
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from consumo_mes_agua where date_part('year',fecha) = ?  and date_part('month',fecha) = ?  ");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				ConsumoMesAguaDTO consumoMesAguaDTO = new ConsumoMesAguaDTO();
+				consumoMesAguaDTO.setFecha(rs.getTimestamp("fecha"));
+				consumoMesAguaDTO.setConsumo_total_mes(rs.getDouble("consumo_total_mes"));
+				listaConsumoMes.add(consumoMesAguaDTO);
+			}
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaConsumoMes;
+	}
 }

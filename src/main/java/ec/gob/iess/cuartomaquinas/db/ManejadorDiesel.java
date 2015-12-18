@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO;
+import ec.gob.iess.cuartomaquinas.dto.ConsumoMesDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
 import ec.gob.iess.cuartomaquinas.dto.MovimientoDieselDTO;
@@ -149,4 +150,32 @@ public class ManejadorDiesel {
 			}
 			return lista;
 		}
+	public List<ConsumoMesDieselDTO> buscarEstadistica2 (int mes, int anio){
+		   List<ConsumoMesDieselDTO> listaConsumoMes = new ArrayList<ConsumoMesDieselDTO> ();
+		   Connection conn = null;
+		try{
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from consumo_mes_diesel where date_part('year',fecha) = ?  and date_part('month',fecha) = ?  ");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				ConsumoMesDieselDTO consumoMesDieselDTO = new ConsumoMesDieselDTO();
+				consumoMesDieselDTO.setFecha(rs.getTimestamp("fecha"));
+				consumoMesDieselDTO.setConsumo_total_mes(rs.getDouble("consumo_total_mes"));
+				listaConsumoMes.add(consumoMesDieselDTO);
+			}
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listaConsumoMes;
+	}
 }

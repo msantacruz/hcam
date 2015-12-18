@@ -7,6 +7,7 @@ public class ConsumoAguaDTO {
 	
 	private Double consumo;
 	private Date fecha;
+	
 	public Double getConsumo() {
 		return consumo;
 	}

@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoAguaDTO"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoMesAguaDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorAgua"%>
 <html>
@@ -12,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Estadistica Agua | HCAM</title>
+    <title>Estad&iacute;stica Agua | HCAM</title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
@@ -59,7 +60,7 @@
                     <a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">AGUA POTABLE</span></a>
                 </li>
                 <li>
-                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DIESEL</span></a>
+                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DI&Eacute;SEL</span></a>
                 </li>
                 <li>
                     <a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">VAPOR</span></a>
@@ -92,7 +93,7 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Estadistica Sistema de Presi&oacute;n Constante</h2>
+                    <h2>Estad&iacute;stica Sistema de Presi&oacute;n Constante</h2>
                 </div>
                
             </div>
@@ -224,7 +225,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Estadistica de Consumo</h5>   
+                        <h5>Estad&iacute;stica de Consumo de Agua</h5>   
              		</div>
                     <div class="ibox-content">
                            <div class="flot-chart">     
@@ -240,7 +241,7 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro del consumo de agua</h5>
+                        <h5>Registro del consumo de Agua</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -281,12 +282,60 @@
                 </div>
             </div>
             </div>
-           
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del Consumo Mensual de Agua</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorAgua manejadorAguaConsumoMesTabla = new ManejadorAgua();
+						List<ConsumoMesAguaDTO> listaConsumoMesTabla= manejadorAguaConsumoMesTabla.buscarEstadistica2(Integer.parseInt(mes), Integer.parseInt(anio));
+						SimpleDateFormat formatoTablaMes = new SimpleDateFormat("yyyy-MM");
+						for(ConsumoMesAguaDTO consumo_mes_agua: listaConsumoMesTabla) {                   		
+                    %> 
+                    <tr>
+                        <td><%= formatoTablaMes.format(consumo_mes_agua.getFecha()) %></td>
+                        <td><%= consumo_mes_agua.getConsumo_total_mes() %> Gal</td>
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>    
+             
+             
+             
+                  
         </div>
         <div class="footer">
             
             <div>
-                <strong>Copyright</strong> Escuela Politecnica Nacional - FIEE &copy; 2014-2015
+                <strong>Copyright</strong> Escuela Polit&eacute;cnica Nacional - FIEE &copy; 2014-2015
             
             </div>
         </div>

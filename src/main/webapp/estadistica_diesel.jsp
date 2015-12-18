@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO"%>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoMesDieselDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorDiesel"%>
 <html>
@@ -12,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Estadistica Diesel | HCAM</title>
+    <title>Estad&iacute;stica Di&eacute;sel | HCAM</title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	
@@ -59,7 +60,7 @@
                     <a href="agua.html"><i class="fa fa-tint"></i> <span class="nav-label">AGUA POTABLE</span></a>
                 </li>
                 <li class="active">
-                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DIESEL</span></a>
+                    <a href="diesel.html"><i class="fa fa-truck"></i> <span class="nav-label">DI&Eacute;SEL</span></a>
                 </li>
                 <li>
                     <a href="vapor.html"><i class="fa fa-fire"></i> <span class="nav-label">VAPOR</span></a>
@@ -79,7 +80,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de Maquinas</span>
+                    <span class="m-r-sm text-muted welcome-message">Monitoreo Casa de M&aacute;quinas</span>
                 </li>
                 
                 <li>
@@ -92,7 +93,7 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Estadistica Sistema de Monitoreo de Diesel</h2>
+                    <h2>Estad&iacute;stica Sistema de Monitoreo de Di&eacute;sel</h2>
                 </div>
                
             </div>
@@ -144,7 +145,7 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro de cantidad de Diesel en los Tanques, Cantidad Entregada y Estado de Sensores.</h5>
+                        <h5>Registro de la cantidad de Di&eacute;sel Almacenado, Valores de Ingreso o Salida de Combustlibe y Estado de Alarmas.</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -153,11 +154,12 @@
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
+                        <th>Evento</th>
+                        <th>Cantidad</th>
                         <th>Tanque 1</th>
                         <th>Tanque 2</th>
                         <th>Total</th>
-                        <th>Descarga - Temperatura</th>
-                        <th>Contador Salida</th>
+                        <th>Temperatura</th>
                         <th>Alarma</th>
                     </tr>
                     </thead>
@@ -184,6 +186,7 @@
                         <td><%= diesel.getAcumuladoTanque1() %> GALONES</td>
                         <td><%= diesel.getAcumuladoTanque2() %> GALONES</td>
                         <td><%= diesel.getTotal() %> GALONES</td>
+                        <td><%= diesel.getTemperatura()  %> &#176; C</td>
                         <td><%= diesel.getDescarga() %> GALONES <%= diesel.getTemperatura() %> &#176; C</td>
                         <td><%= diesel.getSalida() %> GALONES</td>
                         <td><%= diesel.getAlarma() %></td>
@@ -197,12 +200,13 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                         <th>Fecha y Hora</th>
+                        <th>Fecha y Hora</th>
+                        <th>Evento</th>
+                        <th>Cantidad</th>
                         <th>Tanque 1</th>
                         <th>Tanque 2</th>
                         <th>Total</th>
-                        <th>Descarga - Temperatura</th>
-                        <th>Contador Salida</th>
+                        <th>Temperatura</th>
                         <th>Alarma</th>
                         
                         
@@ -222,7 +226,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Estadistica de Consumo</h5>   
+                        <h5>Estad&iacute;stica de Consumo de Di&eacute;sel</h5>   
              		</div>
                     <div class="ibox-content">
                            <div class="flot-chart">
@@ -237,7 +241,7 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro del Consumo de Diesel</h5>
+                        <h5>Registro del Consumo de Di&eacute;sel</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -279,11 +283,58 @@
                 </div>
             </div>
             </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del Consumo Mensual de Diesel</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorDiesel manejadorDieselConsumoMesTabla = new ManejadorDiesel();
+						List<ConsumoMesDieselDTO> listaConsumoMesTabla= manejadorDieselConsumoMesTabla.buscarEstadistica2(Integer.parseInt(mes), Integer.parseInt(anio));
+						SimpleDateFormat formatoTablaMes = new SimpleDateFormat("yyyy-MM");
+						for(ConsumoMesDieselDTO consumo_mes_diesel: listaConsumoMesTabla) {                   		
+                    %> 
+                    <tr>
+                        <td><%= formatoTablaMes.format(consumo_mes_diesel.getFecha()) %></td>
+                        <td><%= consumo_mes_diesel.getConsumo_total_mes() %> Gal</td>
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div> 
+            
         </div>
         <div class="footer">
             
             <div>
-                <strong>Copyright</strong> Escuela Politecnica Nacional - FIEE &copy; 2014-2015
+                <strong>Copyright</strong> Escuela Polit&eacute;cnica Nacional - FIEE &copy; 2014-2015
             
             </div>
         </div>
