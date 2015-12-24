@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.AguaDTO"%>
@@ -258,11 +259,12 @@
                     	ManejadorAgua manejadorAguaConsumoTabla = new ManejadorAgua();
 						List<ConsumoAguaDTO> listaConsumoTabla= manejadorAguaConsumoTabla.buscarEstadistica1(Integer.parseInt(mes), Integer.parseInt(anio));
 						SimpleDateFormat formatoTabla = new SimpleDateFormat("yyyy-MM-dd");
+						DecimalFormat formatter = new DecimalFormat("#,###.00");
 						for(ConsumoAguaDTO consumo_agua: listaConsumoTabla) {                   		
                     %> 
                     <tr>
                         <td><%= formatoTabla.format(consumo_agua.getFecha()) %></td>
-                        <td><%= consumo_agua.getConsumo() %> Gal</td>
+                        <td><%= formatter.format(consumo_agua.getConsumo()) %> Gal</td>
                     </tr>
                     <%
                     	}
@@ -301,13 +303,14 @@
                     <tbody>
                     <% 
                     	ManejadorAgua manejadorAguaConsumoMesTabla = new ManejadorAgua();
-						List<ConsumoMesAguaDTO> listaConsumoMesTabla= manejadorAguaConsumoMesTabla.buscarEstadistica2(Integer.parseInt(mes), Integer.parseInt(anio));
+						List<ConsumoMesAguaDTO> listaConsumoMesTabla= manejadorAguaConsumoMesTabla.buscarEstadistica2(Integer.parseInt(anio));
 						SimpleDateFormat formatoTablaMes = new SimpleDateFormat("yyyy-MM");
+						DecimalFormat formatterMes = new DecimalFormat("#,###.00");
 						for(ConsumoMesAguaDTO consumo_mes_agua: listaConsumoMesTabla) {                   		
                     %> 
                     <tr>
                         <td><%= formatoTablaMes.format(consumo_mes_agua.getFecha()) %></td>
-                        <td><%= consumo_mes_agua.getConsumo_total_mes() %> Gal</td>
+                        <td><%= formatterMes.format(consumo_mes_agua.getConsumo_total_mes()) %> Gal</td>
                     </tr>
                     <%
                     	}
@@ -368,9 +371,12 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
+    
+    <script src="js/jquery.blockUI.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
+    	
         $(document).ready(function() {        	
 
         	$("#mes").val(<%=mes%>).attr('selected', 'selected');
@@ -461,16 +467,6 @@
             });
         });
 
-        function fnClickAddRow() {
-            $('#editable').dataTable().fnAddData( [
-                "Custom row",
-                "New row",
-                "New row",
-                "New row",
-                "New row",
-                "New row"] );
-
-        }
     </script>
 <style>
     body.DTTT_Print {

@@ -87,15 +87,14 @@ public class ManejadorAgua {
 		return listaConsumo;
 	}
 
-	public List<ConsumoMesAguaDTO> buscarEstadistica2(int mes, int anio) {
+	public List<ConsumoMesAguaDTO> buscarEstadistica2(int anio) {
 		List<ConsumoMesAguaDTO> listaConsumoMes = new ArrayList<ConsumoMesAguaDTO>();
 		Connection conn = null;
 		try {
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from consumo_mes_agua where date_part('year',fecha) = ?  and date_part('month',fecha) = ?  ");
+					.prepareStatement("select * from consumo_mes_agua where date_part('year',fecha) = ?");
 			ps.setInt(1, anio);
-			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ConsumoMesAguaDTO consumoMesAguaDTO = new ConsumoMesAguaDTO();
@@ -160,7 +159,7 @@ public class ManejadorAgua {
 		ResultSet rs = null;
 		try {
 			conn = GestorConexion.obtenerConexion();
-			psVerificacion =  conn.prepareStatement("select * from cosumo_agua where id=?");
+			psVerificacion =  conn.prepareStatement("select * from consumo_agua where id=?");
 			ps = conn
 					.prepareStatement("INSERT INTO consumo_agua(id, fecha, consumo)"
 							+ " VALUES (?, ?, ?)");
@@ -217,7 +216,7 @@ public class ManejadorAgua {
 					.prepareStatement("INSERT INTO consumo_mes_agua(id, fecha, consumo_total_mes)"
 							+ " VALUES (?, ?, ?)");
 			psUpdate = conn
-					.prepareStatement("update consumo_mes_agua set id=?, fecha=?, consumo_total_mes)");
+					.prepareStatement("update consumo_mes_agua set id=?, fecha=?, consumo_total_mes=?");
 			for(ReplicacionConsumoAguaDTO replicAgua: lista) {
 				psVerificacion.setLong(1, replicAgua.getId());
 				rs = psVerificacion.executeQuery();
