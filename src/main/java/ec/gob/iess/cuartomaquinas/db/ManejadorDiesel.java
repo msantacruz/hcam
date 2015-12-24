@@ -12,7 +12,7 @@ import java.util.List;
 import ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.ConsumoMesDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO;
-import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
+//import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
 import ec.gob.iess.cuartomaquinas.dto.MovimientoDieselDTO;
 
 public class ManejadorDiesel {
@@ -25,15 +25,38 @@ public class ManejadorDiesel {
 		try {
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from movimiento_diesel order by id desc limit 1");
+					.prepareStatement("select * from datos_plc_diesel order by id desc limit 1");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				movimientoDieselDTO.setDescarga(rs.getDouble("descarga"));
-				movimientoDieselDTO.setSalida(rs.getDouble("salida"));
-				movimientoDieselDTO.setTemperatura(rs.getDouble("temperatura"));
-				movimientoDieselDTO.setAlarma(rs.getString("alarma"));
-				movimientoDieselDTO.setAcumuladoTanque1(rs.getDouble("acumulado_tanque1"));
-				movimientoDieselDTO.setAcumuladoTanque2(rs.getDouble("acumulado_tanque2"));
+				movimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
+				movimientoDieselDTO.setTemperatura(rs.getInt("temperatura"));
+				movimientoDieselDTO.setBajo_tanque1(rs.getInt("bajo_tanque1"));
+				movimientoDieselDTO.setAlto_tanque1(rs.getInt("alto_tanque1"));
+				movimientoDieselDTO.setBajo_tanque2(rs.getInt("bajo_tanque2"));
+				movimientoDieselDTO.setAlto_tanque2(rs.getInt("alto_tanque2"));
+				movimientoDieselDTO.setPulsos_entrada(rs.getDouble("pulsos_entrada"));
+				movimientoDieselDTO.setBomba_ingreso(rs.getInt("bomba_ingreso"));
+				movimientoDieselDTO.setFrecuencia_entrada(rs.getInt("frecuencia_entrada"));
+				movimientoDieselDTO.setBomba_tdiario(rs.getInt("bomba_tdiario"));
+				movimientoDieselDTO.setGalones_salida(rs.getInt("galones_salida"));
+				movimientoDieselDTO.setFracc_galonsalida(rs.getInt("fracc_galonsalida"));
+				movimientoDieselDTO.setFrecuencia_salida(rs.getInt("frecuencia_salida"));
+				movimientoDieselDTO.setFlujo_salida(rs.getInt("flujo_salida"));
+				movimientoDieselDTO.setFracc_flujosalida(rs.getInt("fracc_flujosalida"));
+				movimientoDieselDTO.setGalones_entrada(rs.getInt("galones_entrada"));
+				movimientoDieselDTO.setFracc_galonentrada(rs.getInt("fracc_galonentrada"));
+				movimientoDieselDTO.setFlujo_entrada(rs.getInt("flujo_entrada"));
+				movimientoDieselDTO.setFracc_flujoentrada(rs.getInt("fracc_flujoentrada"));
+				movimientoDieselDTO.setParo_emergencia(rs.getInt("paro_emergencia"));
+				movimientoDieselDTO.setInicio_galont2(rs.getInt("inicio_galont2"));
+				movimientoDieselDTO.setInicio_fraccgalont2(rs.getInt("inicio_fraccgalont2"));
+				movimientoDieselDTO.setTotal_galont1(rs.getInt("total_galont1"));
+				movimientoDieselDTO.setTotal_fraccgalont1(rs.getInt("total_fraccgalont1"));
+				movimientoDieselDTO.setTotal_galont2(rs.getInt("total_galont2"));
+				movimientoDieselDTO.setTotal_fraccgalont2(rs.getInt("total_fraccgalont2"));
+				movimientoDieselDTO.setPedido_tanque(rs.getInt("pedido_tanque"));
+				movimientoDieselDTO.setTanque_uso(rs.getInt("tanque_uso"));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,7 +70,7 @@ public class ManejadorDiesel {
 		return movimientoDieselDTO;
 	}
 	
-	public EstadoBombasDTO buscarUltimoValorBombas() {
+	/*public EstadoBombasDTO buscarUltimoValorBombas() {
 		EstadoBombasDTO estadoBombasDTO = new EstadoBombasDTO();
 
 		Connection conn = null;
@@ -71,7 +94,7 @@ public class ManejadorDiesel {
 			}
 		}
 		return estadoBombasDTO;
-	}
+	}*/
 	
 	public List<EstadisticaMovimientoDieselDTO> buscarEstadistica(int mes, int anio){
 		

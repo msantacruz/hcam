@@ -110,7 +110,7 @@
 				<div class="row  border-bottom white-bg dashboard-header">
 
 					<div class="col-sm-3">
-						<h2>ALARMAS</h2>
+						<h2><strong>ALARMAS</strong></h2>
 						<div id="alarma" class="widget red-bg p-lg text-center">
 							<div class="m-b-md">
 								<i class="fa fa-warning fa-4x"></i>
@@ -126,12 +126,12 @@
 					<div class="col-sm-6">
 						<h2 align="center" id="fecha"></h2>
 						<div class="ibox-content ibox-heading">
-							<h3>CUADRO DE DIALOGO</h3>
+							<h3><strong>ESTADO DEL SISTEMA</strong></h3>
 							<h3 id="texto_cuadro_dialogo">OPERACI&Oacute;N NORMAL</h3>
 						</div>
 
 						<div class="ibox-content">
-							<h3>INDICACIONES</h3>
+							<h3><strong>INDICACIONES</strong></h3>
 
 							<h3 id="texto_indicacion_alarma"></h3>
 							<p></p>
@@ -141,13 +141,12 @@
 
 					</div>
 					<div class="col-sm-3">
-						<h2>NOTIFICACIONES</h2>
+						<h2><strong>NOTIFICACIONES</strong></h2>
 						<div id="notificacion" class="widget yellow-bg p-lg text-center">
 							<div class="m-b-md">
 								<i class="fa fa-bell fa-4x"></i>
-								<h1 class="m-xs">47</h1>
-								<h3 class="font-bold no-margins">NOTIFICACI&iacute;N</h3>
-								<small>SISTEMA SIN CONEXI&Oacute;N</small>
+								<h3 id="texto_notificacion" class="font-bold no-margins">NOTIFICACI&Oacute;N</h3>
+								
 							</div>
 						</div>
 						<small>Espacio para las notificaciones</small>
@@ -160,14 +159,13 @@
 					<div class="col-lg-6">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>TANQUE 1</h5>
-								<div ibox-tools=""></div>
+								<h5 class="no-margins"  id="tanque1">TANQUE 1</h5>
 							</div>
 							<div class="ibox-content">
 								<div class="text-center">
 									<!--OJO-->
 									<center>
-										<div class="industrial tank size four" id="tanque1">
+										<div class="industrial tank size four" id="total_galont1">
 											<span class="ticks" data-amount="6" data-scale-freq="1"></span>
 											<div class="space"></div>
 											<div class="meter"></div>
@@ -181,11 +179,11 @@
 					<div class="col-lg-6">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>TANQUE 2</h5>
+								<h5 class="no-margins"  id="tanque2">TANQUE 2</h5>
 							</div>
 							<div class="ibox-content">
 								<center>
-									<div class="industrial tank size four" id="tanque2">
+									<div class="industrial tank size four" id="total_galont2">
 										<span class="ticks" data-amount="6" data-scale-freq="1"></span>
 										<div class="space"></div>
 										<div class="meter"></div>
@@ -206,11 +204,12 @@
 							</div>
 							<div class="ibox-content">
 								<center>
-									<img id="bomba1" width="320" height="200"
+									<img id="bomba_ingreso" width="320" height="200"
 										src="images/bomba_parada.png">
 								</center>
 								<center>
-									<h4 class="no-margins" id="descarga"></h4>
+									<h4 class="no-margins" id="galones_entrada"></h4>
+									<h4 class="no-margins" id="flujo_entrada"></h4>
 									<!--OJO-->
 									<h5 class="no-margins" id="texto_bomba1">APAGADA</h5>
 								</center>
@@ -225,10 +224,11 @@
 							<div class="ibox-content">
 
 								<center>
-									<img id="bomba2" width="320" height="200" src="images/bomba_parada.png">
+									<img id="bomba_tdiario" width="320" height="200" src="images/bomba_parada.png">
 								</center>
 								<center>
-									<h4 class="no-margins" id="salida"></h4>
+									<h4 class="no-margins" id="galones_salida"></h4>
+									<h4 class="no-margins" id="flujo_salida"></h4>
 									<!--OJO-->
 									<h5 class="no-margins" id="texto_bomba2">APAGADA</h5>
 								</center>
@@ -238,7 +238,7 @@
 					<div class="col-lg-4">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>TEMPERATURA DI&Eacute;SEL</h5>
+								<h5>TEMPERATURA DI&Eacute;SEL AL MOMENTO DEL INGRESO</h5>
 							</div>
 							<div class="ibox-content">
 								<center>
@@ -283,7 +283,7 @@
 
 		$(document).ready(function() {
 			setTimeout(function() {
-				$("#tanque1").industrial({
+				$("#total_galont1").industrial({
 					default_value : true, //Strating value for component
 					low : 0, //Scale lower boundary
 					high : 6000, //Scale upper boundary
@@ -293,7 +293,7 @@
 					tick_height : 3, //Percent height of each tick mark
 					digit_amount : 4, //Amount of digital readout digits
 				});
-				$("#tanque2").industrial({
+				$("#total_galont2").industrial({
 					default_value : true, //Strating value for component
 					low : 0, //Scale lower boundary
 					high : 6000, //Scale upper boundary
@@ -320,9 +320,9 @@
 
 		var refreshId = setInterval(function() {
 			actualizarTanques();
-			console.log(banAlarmas)
-			actualizarEstadoBombas();
-			console.log(banAlarmas)
+			//console.log(banAlarmas)
+			//actualizarEstadoBombas();
+			//console.log(banAlarmas)
 			actualizarFecha();
 			banAlarmas = false;
 		}, 2000);
@@ -332,41 +332,151 @@
 			$.get('ActualizarTanques', {
 				"rand" : Math.random()
 			}, function(resp) { // on sucess
+				var volument1 = 0;
+				var volument2 = 0;
+				var alarma_bajo_tanque1 = 0;
+				var alarma_bajo_tanque2 = 0;
+				var alarma_alto_tanque1 = 0;
+				var alarma_alto_tanque2 = 0;
+				var alarma_paro_emergencia = 0;
+				var pedido_tanque = 0;
+				var tanque_uso_indicador = 0;
+				var textos_alarmas = "";
+				var indicaciones_alarmas = "";
+				var dialogos_alarmas = "";
+				
 				$.each(resp, function(nombre, valor) {
-					if (nombre == "acumuladoTanque1") {
+					if (nombre == "total_galont1") {
 						$("#texto_tanque1").html(valor + " Galones");
-						$("#tanque1").industrial(valor);
+						$("#total_galont1").industrial(valor);
+						volument1 = valor;
 					}
-					if (nombre == "acumuladoTanque2") {
+					if (nombre == "total_galont2") {
 						$("#texto_tanque2").html(valor + " Galones");
-						$("#tanque2").industrial(valor);
+						$("#total_galont2").industrial(valor);
+						volument2 = valor;
 					}
 					if (nombre == "temperatura") {
 						$("#texto_temperatura").html(valor + "&#176; C");
 						$("#temperatura").industrial(valor);
 					}
-					if (nombre == "descarga") {
-						$("#descarga").html(valor + " Galones");
+					if (nombre == "galones_entrada") {
+						$("#galones_entrada").html(valor + " Galones");
 					}
-					if (nombre == "salida") {
-						$("#salida").html(valor + " Galones");
+					if (nombre == "flujo_entrada") {
+						$("#flujo_entrada").html(valor + " GPM");
 					}
-					if (nombre == "alarma") {
-						if (valor) {
-							$("#alarma").show();
-							if(!banAlarmas){
-								$("#texto_cuadro_dialogo").html()
-							}
+					if (nombre == "galones_salida") {
+						$("#galones_salida").html(valor + " Galones");
+					}
+					if (nombre == "flujo_salida") {
+						$("#flujo_salida").html(valor + " GPM");
+					}
+					if (nombre == "bomba_ingreso") {
+						if (valor == 10) {
+							$("#bomba_ingreso").attr("src",
+									"images/bomba_funcionando.gif");
+							$("#texto_bomba1").html("FUNCIONANDO");
 						} else {
-							$("#alarma").hide();
+							$("#bomba_ingreso").attr("src",
+									"images/bomba_parada.png");
+							$("#texto_bomba1").html("APAGADA");
 						}
 					}
+					if (nombre == "bomba_tdiario") {
+						if (valor == 10) {
+							$("#bomba_tdiario").attr("src",
+									"images/bomba_funcionando.gif");
+							$("#texto_bomba2").html("FUNCIONANDO");
+						} else {
+							$("#bomba_tdiario").attr("src",
+									"images/bomba_parada.png");
+							$("#texto_bomba2").html("APAGADA");
+						}
+					}
+					if (nombre == "bajo_tanque1") {
+						alarma_bajo_tanque1 = valor;
+						
+					}
+					if (nombre == "alto_tanque1") {
+						alarma_alto_tanque1 = valor;
+					}
+					if (nombre == "bajo_tanque2") {
+						alarma_bajo_tanque2 = valor;
+					}
+					if (nombre == "alto_tanque2") {
+						alarma_alto_tanque2 = valor;
+					}
+					if (nombre == "paro_emergencia") {
+						alarma_paro_emergencia = valor;
+					}
+					if (nombre == "pedido_tanque") {
+						pedido_tanque = valor;
+					}
+					if (nombre == "tanque_uso") {
+						tanque_uso_indicador = valor;
+					}
 				});
+				if (alarma_bajo_tanque1 == 10) {
+					banAlarmas = true;
+					textos_alarmas = "Nivel Bajo Tanque 1";
+					dialogos_alarmas = "Tanque 1 a alcanzado su Nivel m&aacute;s Bajo";
+					indicaciones_alarmas = "Debe entrar en operaci&oacute;n el Tanque 2";
+				}
+				if (alarma_alto_tanque1 == 10) {
+					banAlarmas = true;
+					textos_alarmas = textos_alarmas+"<br/>Nivel Alto Tanque 1";
+					dialogos_alarmas = dialogos_alarmas+"<br/>Tanque 1 a alcanzado su Nivel m&aacute;s Alto";
+					indicaciones_alarmas = indicaciones_alarmas+"<br/>Habilitar ingreso combustible Tanque 2, reiniciar sistema";
+				}
+				if (alarma_bajo_tanque2 == 10) {
+					banAlarmas = true;
+					textos_alarmas = textos_alarmas+"<br/>Nivel Bajo Tanque 2";
+					dialogos_alarmas = dialogos_alarmas+"<br/>Tanque 2 a alcanzado su Nivel m&aacute;s Bajo";
+					indicaciones_alarmas = indicaciones_alarmas+"<br/>Debe entrar en operaci&oacute;n el Tanque 1";
+				}
+				if (alarma_alto_tanque2 == 10) {
+					banAlarmas = true;
+					textos_alarmas = textos_alarmas+"<br/>Nivel Alto Tanque 2";
+					dialogos_alarmas = dialogos_alarmas+"<br/>Tanque 2 a alcanzado su Nivel m&aacute;s Alto";
+					indicaciones_alarmas = indicaciones_alarmas+"<br/>Habilitar ingreso combustible Tanque 1, reiniciar sistema";
+				}
+				if (alarma_paro_emergencia == 10) {
+					banAlarmas = true;
+					textos_alarmas = textos_alarmas+"<br/>PARO DE EMERGENCIA";
+					dialogos_alarmas = dialogos_alarmas+"<br/>EMERGENCIA EN EL SISTEMA";
+					indicaciones_alarmas = indicaciones_alarmas+"<br/>Atender la emergencia existente en el sistema";
+				}
+				if (banAlarmas){
+					$("#alarma").show();
+					$("#texto_estado_alarma").html(textos_alarmas);
+					$("#texto_cuadro_dialogo").html(dialogos_alarmas);
+					$("#texto_indicacion_alarma").html(indicaciones_alarmas);	
+				}
+				if(alarma_bajo_tanque1 == 20 && alarma_alto_tanque1 == 20 && alarma_bajo_tanque2 == 20 && alarma_alto_tanque2 == 20 && alarma_paro_emergencia == 20){
+					$("#alarma").hide();
+					$("#notificacion").hide();
+				}
+				if(pedido_tanque == 1 && volument1 <= 300){
+					$("#notificacion").show();
+					$("#texto_notificacion").html("Realizar el pedido de reabastecimiento de combustible para el Tanque1");
+				}
+				if(pedido_tanque == 2 && volument2 <= 300){
+					$("#notificacion").show();
+					$("#texto_notificacion").html("Realizar el pedido de reabastecimiento de combustible para el Tanque2");
+				}
+				if (tanque_uso_indicador == 1){
+					$("#tanque1").html("TANQUE 1 EN OPERACI&Oacute;N");
+				}
+				if (tanque_uso_indicador == 2){
+					$("#tanque2").html("TANQUE 2 EN OPERACI&Oacute;N");
+				}
+
 			}).fail(function() { //on failure
 				alert("Fall&oacute; la petici&oacute;n");
 			});
 		}
-		function actualizarEstadoBombas() {
+		/*function actualizarEstadoBombas() {
 			$.get(
 					'ActualizarEstadoBombasDiesel',
 					{
@@ -374,34 +484,34 @@
 					},
 					function(resp) { //on sucess
 						$.each(resp, function(nombre, valor) {
-							if (nombre == "bomba1") {
-								if (valor) {
-									$("#bomba1").attr("src",
+							if (nombre == "bomba_ingreso") {
+								if (valor == 10) {
+									$("#bomba_ingreso").attr("src",
 											"images/bomba_funcionando.gif");
 									$("#texto_bomba1").html("FUNCIONANDO");
 								} else {
-									$("#bomba1").attr("src",
+									$("#bomba_ingreso").attr("src",
 											"images/bomba_parada.png");
 									$("#texto_bomba1").html("APAGADA");
 								}
 							}
-							if (nombre == "bomba2") {
-								if (valor) {
-									$("#bomba2").attr("src",
+							if (nombre == "bomba_tdiario") {
+								if (valor == 10) {
+									$("#bomba_tdiario").attr("src",
 											"images/bomba_funcionando.gif");
 									$("#texto_bomba2").html("FUNCIONANDO");
 								} else {
-									$("#bomba2").attr("src",
+									$("#bomba_tdiario").attr("src",
 											"images/bomba_parada.png");
 									$("#texto_bomba2").html("APAGADA");
 								}
 							}
 						});
 					}).fail(function() { //on failure
-				alert("Fall&oacute; la petici&oacute;n");
+				alert("Falló");
 			});
 		}
-
+*/
 		function actualizarFecha() {
 			var monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo",
 					"Junio", "Julio", "Agosto", "Septiembre", "Octubre",
