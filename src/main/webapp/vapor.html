@@ -131,11 +131,7 @@
                         <div id="notificacion" class="widget yellow-bg p-lg text-center">
                             <div class="m-b-md">
                                 <i class="fa fa-bell fa-4x"></i>
-                                <h1 class="m-xs">47</h1>
-                                <h3 class="font-bold no-margins">
-                                NOTIFICACI&Oacute;N
-                                </h3>
-                                <small>SISTEMA SIN CONEXI&Oacute;N</small>
+                                <h3 id="texto_notificacion" class="font-bold no-margins">NOTIFICACI&Oacute;N</h3>
                             </div>
                         </div>
                         <small>Espacio para las notificaciones</small>
@@ -149,19 +145,16 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Caldero CB-1</h5>
-                            
                         </div>
-                    
                         <div class="ibox-content">
-                            <center><img  src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="cb1"  src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>De acuerdo al horario de operaci&oacute;n del Caldero</p>
                             </br>
                             </br>
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_cb1"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_cb1"></h3>
                             <small>Ingreso de Vapor 6"</small>
-                            
                         </div>
                     </div>
                 </div> 
@@ -173,11 +166,11 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="tanques_agua_caliente" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Lunes - Viernes </br> Desde 6:00 Hasta 19:00 </br>  S&aacute;bado - Domingo - Feriados </br> Desde 6:00 Hasta 16:00</p>
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_tanques_agua_caliente"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_tanques_agua_caliente"></h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -189,13 +182,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="cocina" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 19:00</p>
                             </br>
                             </br>                        
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_cocina"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_cocina"></h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -208,13 +201,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="patologia_laboratorio_central" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_patologia_laboratorio_central"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_patologia_laboratorio_central"></h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -227,13 +220,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="obstetricia" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_obstetricia"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_obstetricia"></h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -246,13 +239,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="biberones" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_biberones"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_biberones"></h3>
                             <small>Salida de Vapor 2"</small>
                         </div>
                     </div>
@@ -266,13 +259,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="piscina" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 15:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_piscina"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_piscina"></h3>
                             <small>Salida de Vapor 1 1/2"</small>
                         </div>
                     </div>
@@ -285,13 +278,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="quirofano_sala_partos" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_quirofano_sala_partos"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_quirofano_sala_partos"></h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -304,13 +297,13 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="lavanderia_comedor" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 6:00 Hasta 00:00</p>
                             </br>
                             </br> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_lavanderia_comedor"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_lavanderia_comedor"></h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -323,11 +316,11 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="lavanderia" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Lunes - Viernes </br> Desde 7:00 Hasta 19:00 </br>  S&aacute;bado - Domingo - Feriados </br> Desde 7:00 Hasta 13:00</p>
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_lavanderia"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_lavanderia"></h3>
                             <small>Salida de Vapor 3"</small>
                         </div>
                     </div>
@@ -340,11 +333,11 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
+                            <center><img id="cb2_cb4" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>De acuerdo al horario de operaci&oacute;n de los Calderos</p>
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_cb2_cb4"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_cb2_cb4"></h3>
                             <small>Ingreso de Vapor 6"</small>
                         </div>
                     </div>
@@ -353,15 +346,15 @@
                 <div class="col-md-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Calderos CB-2 y CB-4</h5>
+                            <h5>Calderos CB-3 y CB-5</h5>
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="cb3_cb5" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>De acuerdo al horario de operaci&oacute;n de los Calderos</p>
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_cb3_cb5"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_cb3_cb5"></h3>
                             <small>Ingreso de Vapor 6"</small>
                         </div>
                     </div>
@@ -375,27 +368,12 @@
                         </div>
                     
                         <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
+                            <center><img id="quemados" src="images/valvula_cerrada.png" width="130px" height="200px"/></center>
                             <h3 class="no-margins">HORARIO</h3>
                             <p>Todos los D&iacute;as </br> Desde 7:00 Hasta 23:00</p> 
-                            <h3>Flujo = 20 Kg/h</h3>
-                            <h3>Presi&oacute;n = 20 PSI</h3>
+                            <h3>Flujo=</h3><h3 class="no-margins" id="flujo_quemados"></h3>
+                            <h3>Presi&oacute;n=</h3><h3 class="no-margins" id="presion_quemados"></h3>
                             <small>Salida de Vapor 2"</small>
-                        </div>
-                    </div>
-                </div> 
-                <div class="col-md-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                        
-                            <h5>Purga Condensado</h5>
-
-                        </div>
-                    
-                        <div class="ibox-content">
-                            <center><img src="images/valvula_abierta.png" width="130px" height="200px"/></center>
-                            <small>Salida de Condensado 1"</small>
-                            
                         </div>
                     </div>
                 </div> 
@@ -403,60 +381,35 @@
                 <div class="col-md-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                         <h5>Temperatura</h5>
+                         <h5>Temperatura Vapor</h5>
                         </div>
-                            
-                        <div class="ibox-content">
-                            
-                            <div class="industrial thermometer size three"> 
-                                <span class="ticks" data-amount="10">
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                <div class="tick" style="height: 3%; margin-bottom: 113.555555555556%;"></div>
-                                </span>
-                                <div class="space" style="height: 93%;"></div>
-                                <div class="meter"></div>
-                                
-                            </div>
-                            <h4>Temperatura = 60°C</h4>
-                            <small>Temperatura del distribuidor de vapor.</small>
-                            
-                            
-                        </div>
+                          <div class="ibox-content">
+								<center>
+									<div class="industrial thermometer size three" id="temperatura">
+										<span class="ticks" data-amount="5" data-scale-freq="1"></span>
+										<div class="space"></div>
+										<div class="meter"></div>
+									</div>
+								</center>
+								<h2 align="center" id="texto_temperatura"></h2>
+						  </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                         <h5>Presi&oacute;n</h5>
+                         <h5>Presi&oacute;n del Distribuidor de Vapor</h5>
                         </div>
                             
                         <div class="ibox-content">
-                            
-                            <center><div class="industrial gauge size two" id="presion_vapor"> <span class="ticks" data-amount="6" data-scale-freq="1"></span>
-								<div class="space"></div>
-								<div class="meter"></div>
-							</div></center>
-							<h2 align="center" id="presion_vapor"></h2>
-                            
-                            </br>
-                            </br>
-                            </br>
-                            </br>
-                            <h4>Presi&oacute;n = 100 PSI</h4>
-                            </br>
-                            </br>
-                            <small>Presi&oacute;n del distribuidor de vapor.</small>
-                            
-                            
+                            <div class="text-center">
+                               <center><div class="industrial gauge size two" id="presion"> <span class="ticks" data-amount="6" data-scale-freq="1"></span>
+									<div class="space"></div>
+									<div class="meter"></div>
+								</div></center>
+                                <h2 align="center" id="texto_presion"></h2>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -490,15 +443,297 @@
     <script src="js/industrial.js"></script>
 
 	<script>
-        
-    $(document).ready(function(){
+	//var banAlarmas = false;
+
+	$(document).ready(function() {
+		setTimeout(function() {
+			$("#temperatura").industrial({
+				default_value : false, //Strating value for component
+				low : 0, //Scale lower boundary
+				high : 250, //Scale upper boundary
+				tick_scale : true, //Add numerical scales to tick marks?
+				tick_scale_frequency : 1,//Frequency of numerical scales
+				tick_amount : 0, //Amount of tick marks on component
+				tick_height : 1, //Percent height of each tick mark
+				digit_amount : 1, //Amount of digital readout digits
+			});
+	    	 $("#presion").industrial({
+	    		 default_value: true,    // Starting value for component
+	    		 low: 0,                 // Scale lower boundary
+	    		 high: 200,              // Scale upper boundary
+	    		 tick_scale: false,      // Add numerical scales to tick marks?
+	    		 tick_scale_frequency: 1,// Frequency of numerical scales
+	    		 tick_amount: 0,         // Amount of tick marks on component
+	    		 tick_height: 3,         // Percent height of each tick mark
+	    		 digit_amount: 4         // Amount of digital readout digits
+	    	});
+		}, 250);
+	});
+	$("#alarma").hide();
+	$("#notificacion").hide();
+	
         var refreshId = setInterval(function(){
+        	actualizarVapor();
             actualizarFecha();
         },2000);
+        $.ajaxSetup({ cache : false });
         
-        $.ajaxSetup({ cache: false });
-        
-        });
+        function actualizarVapor(){
+        	$.get('ActualizarVapor',{
+        		"rand" : Math.random()
+        	}, function(resp){ // on sucess
+    			
+
+				$.each(resp,function(i,item){
+					
+					var ban_valvula_distribuidor = false;
+	    			var ban_valvula_quemados = false;
+	    			var ban_valvula_cb3_cb5 = false;
+	    			var ban_valvula_cb2_cb4 = false;
+	    			var ban_valvula_lavanderia = false;
+	    			var ban_valvula_lavanderia_comedor = false;
+	    			var ban_valvula_quirofano_sala_partos = false;
+	    			var ban_valvula_piscina = false;
+	    			var ban_valvula_biberones = false;
+	    			var ban_valvula_obstetricia = false;
+	    			var ban_valvula_patologia_laboratorio_central = false;
+	    			var ban_valvula_cocina = false;
+	    			var ban_valvula_tanques_agua_caliente = false;
+	    			var ban_valvula_cb1 = false;
+	    			var valor_estado = "";
+	    			var valor_flujo = 0;
+	    			var valor_presion = 0;
+	    			var valor_temperatura = 0;
+	    			var ban_alarma_alta_presion = 0;
+	    			var ban_alarma_baja_presion = 0;
+	    			
+       				if(item.valvula == "distribuidor"){
+       					ban_valvula_distribuidor = true;
+       				}
+       				if(item.valvula == "quemados"){
+       					ban_valvula_quemados = true;
+       				}
+       				if(item.valvula == "cb3_cb5"){
+       					ban_valvula_cb3_cb5 = true;
+       				}
+       				if(item.valvula == "cb2_cb4"){
+       					ban_valvula_cb2_cb4 = true;
+       				}
+       				if(item.valvula == "lavanderia"){
+       					ban_valvula_lavanderia = true;
+       				}
+       				if(item.valvula == "lavanderia_comedor"){
+       					ban_valvula_lavanderia_comedor = true;
+       				}
+       				if(item.valvula == "quirofano_sala_partos"){
+       					ban_valvula_quirofano_sala_partos = true;
+       				}
+       				if(item.valvula == "piscina"){
+       					ban_valvula_piscina = true;
+       				}
+       				if(item.valvula == "biberones"){
+       					ban_valvula_biberones = true;
+       				}
+       				if(item.valvula == "obstetricia"){
+       					ban_valvula_obstetricia = true;
+       				}
+       				if(item.valvula == "patolagia_laboratorio_central"){
+       					ban_valvula_patologia_laboratorio_central = true;
+       				}
+       				if(item.valvula == "cocina"){
+       					ban_valvula_cocina = true;
+       				}
+       				if(item.valvula == "tanques_agua_caliente"){
+       					ban_valvula_tanques_agua_caliente = true;
+       				}
+       				if(item.valvula == "cb1"){
+       					ban_valvula_cb1 = true;
+       				}
+       				
+					valor_estado = item.estado;
+        			valor_flujo = item.flujo;
+        			valor_presion = item.presion;
+        			valor_temperatura = item.temperatura;
+        			ban_alarma_alta_presion = item.alarma_alta_presion;
+        			ban_alarma_baja_presion = item.alarma_baja_presion;
+        			
+        			
+        			
+        			if(ban_valvula_distribuidor){
+            			$("#texto_temperatura").html(valor_temperatura + "&#176; C");
+            			$("#temperatura").industrial(valor_temperatura);
+            			$("#texto_presion").html(valor_presion + "PSI");
+            			$("#presion").industrial(valor_presion);
+            			
+            			if(ban_alarma_alta_presion || ban_alarma_baja_presion){
+        					$("#alarma").show();
+        					if (ban_alarma_alta_presion) {
+        						$("#texto_estado_alarma").html("PRESI&Oacute;N ALTA");
+            					$("#texto_cuadro_dialogo").html("!!Alta Presi&oacute;n en el Distribuidor de Vapor!!");
+            					$("#texto_indicacion_alarma").html("Abrir v&aacute;lvulas de alivio de presi&oacute;n<br/> Revisar proceso de generaci&oacute;n de vapor");
+        					}
+        					if(ban_alarma_baja_presion) {
+            					$("#texto_estado_alarma").html("PRESI&Oacute;N BAJA");
+            					$("#texto_cuadro_dialogo").html("!!Baja Presi&oacute;n en el Distribuidor de Vapor!!");
+            					$("#texto_indicacion_alarma").html("Revisar proceso de generaci&oacute;n de vapor");
+        					}        					
+        				}else{
+        					$("#alarma").hide();
+        					$("#texto_estado_alarma").html("");
+        					$("#texto_cuadro_dialogo").html("");
+        					$("#texto_indicacion_alarma").html("");
+        				}
+            	
+            		}
+            		if(ban_valvula_quemados){
+            			if(valor_estado == "on"){
+            				$("#quemados").attr("src","images/valvula_abierta.png");
+                			$("#flujo_quemados").html(valor_flujo + "Kg/h");
+                			$("#presion_quemados").html(valor_presion + "PSI");
+            			}else{
+            				$("#quemados").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_quemados").html(valor_flujo + "Kg/h");
+                			$("#presion_quemados").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_cb3_cb5){
+            			if(valor_estado == "on"){
+            				$("#cb3_cb5").attr("src","images/valvula_abierta.png");
+                			$("#flujo_cb3_cb5").html(valor_flujo + "Kg/h");
+                			$("#presion_cb3_cb5").html(valor_presion + "PSI");
+            			}else{
+            				$("#cb3_cb5").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_cb3_cb5").html(valor_flujo + "Kg/h");
+                			$("#presion_cb3_cb5").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_cb2_cb4){
+            			if(valor_estado == "on"){
+            				$("#cb2_cb4").attr("src","images/valvula_abierta.png");
+                			$("#flujo_cb2_cb4").html(valor_flujo + "Kg/h");
+                			$("#presion_cb2_cb4").html(valor_presion + "PSI");
+            			}else{
+            				$("#cb2_cb4").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_cb2_cb4").html(valor_flujo + "Kg/h");
+                			$("#presion_cb2_cb4").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_lavanderia){
+            			if(valor_estado == "on"){
+            				$("#lavanderia").attr("src","images/valvula_abierta.png");
+                			$("#flujo_lavanderia").html(valor_flujo + "Kg/h");
+                			$("#presion_lavanderia").html(valor_presion + "PSI");
+            			}else{
+            				$("#lavanderia").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_lavanderia").html(valor_flujo + "Kg/h");
+                			$("#presion_lavanderia").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_lavanderia_comedor){
+            			if(valor_estado == "on"){
+            				$("#lavanderia_comedor").attr("src","images/valvula_abierta.png");
+                			$("#flujo_lavanderia_comedor").html(valor_flujo + "Kg/h");
+                			$("#presion_lavanderia_comedor").html(valor_presion + "PSI");
+            			}else{
+            				$("#lavanderia_comedor").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_lavanderia_comedor").html(valor_flujo + "Kg/h");
+                			$("#presion_lavanderia_comedor").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_quirofano_sala_partos){
+            			if(valor_estado == "on"){
+            				$("#quirofano_sala_partos").attr("src","images/valvula_abierta.png");
+                			$("#flujo_quirofano_sala_partos").html(valor_flujo + "Kg/h");
+                			$("#presion_quirofano_sala_partos").html(valor_presion + "PSI");
+            			}else{
+            				$("#quirofano_sala_partos").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_quirofano_sala_partos").html(valor_flujo + "Kg/h");
+                			$("#presion_quirofano_sala_partos").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_piscina){
+            			if(valor_estado == "on"){
+            				$("#piscina").attr("src","images/valvula_abierta.png");
+                			$("#flujo_piscina").html(valor_flujo + "Kg/h");
+                			$("#presion_piscina").html(valor_presion + "PSI");
+            			}else{
+            				$("#piscina").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_piscina").html(valor_flujo + "Kg/h");
+                			$("#presion_piscina").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_biberones){
+            			if(valor_estado == "on"){
+            				$("#biberones").attr("src","images/valvula_abierta.png");
+                			$("#flujo_biberones").html(valor_flujo + "Kg/h");
+                			$("#presion_biberones").html(valor_presion + "PSI");
+            			}else{
+            				$("#biberones").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_biberones").html(valor_flujo + "Kg/h");
+                			$("#presion_biberones").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_obstetricia){
+            			if(valor_estado == "on"){
+            				$("#obstetricia").attr("src","images/valvula_abierta.png");
+                			$("#flujo_obstetricia").html(valor_flujo + "Kg/h");
+                			$("#presion_obstetricia").html(valor_presion + "PSI");
+            			}else{
+            				$("#obstetricia").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_obstetricia").html(valor_flujo + "Kg/h");
+                			$("#presion_obstetricia").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_patologia_laboratorio_central){
+            			if(valor_estado == "on"){
+            				$("#patologia_laboratorio_central").attr("src","images/valvula_abierta.png");
+            			}else{
+            				$("#patologia_laboratorio_central").attr("src","images/valvula_cerrada.png");                			
+            			}
+            			$("#flujo_patologia_laboratorio_central").html(valor_flujo + "Kg/h");
+            			$("#presion_patologia_laboratorio_central").html(valor_presion + "PSI");
+            		}
+            		if(ban_valvula_cocina){
+            			if(valor_estado == "on"){
+            				$("#cocina").attr("src","images/valvula_abierta.png");
+                			$("#flujo_cocina").html(valor_flujo + "Kg/h");
+                			$("#presion_cocina").html(valor_presion + "PSI");
+            			}else{
+            				$("#cocina").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_cocina").html(valor_flujo + "Kg/h");
+                			$("#presion_cocina").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_tanques_agua_caliente){
+            			if(valor_estado == "on"){
+            				$("#tanques_agua_caliente").attr("src","images/valvula_abierta.png");
+                			$("#flujo_tanques_agua_caliente").html(valor_flujo + "Kg/h");
+                			$("#presion_tanques_agua_caliente").html(valor_presion + "PSI");
+            			}else{
+            				$("#tanques_agua_caliente").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_tanques_agua_caliente").html(valor_flujo + "Kg/h");
+                			$("#presion_tanques_agua_caliente").html(valor_presion + "PSI");
+            			}
+            		}
+            		if(ban_valvula_cb1){
+            			if(valor_estado == "on"){
+            				$("#cb1").attr("src","images/valvula_abierta.png");
+                			$("#flujo_cb1").html(valor_flujo + "Kg/h");
+                			$("#presion_cb1").html(valor_presion + "PSI");
+            			}else{
+            				$("#cb1").attr("src","images/valvula_cerrada.png");
+                			$("#flujo_cb1").html(valor_flujo + "Kg/h");
+                			$("#presion_cb1").html(valor_presion + "PSI");
+            			}
+            		}
+    				
+        		});
+        		
+        	}).fail(function() { //on failure
+				alert("Falló la petición");
+			});
+        }
+
 
         function actualizarFecha() {
 			var monthNames = [
@@ -515,6 +750,14 @@
             var hour = date.getHours();
             var minutes = date.getMinutes();
             $("#fecha").html(day + "-" + monthNames[monthIndex] + "-" + year + " " + hour + ":" + minutes);
+            
+            if (hour=="6") {
+            	$("#notificacion").show();
+				$("#texto_notificacion").html("Abrir válvula cocina");
+            } else {
+            	$("#notificacion").hide();
+				$("#texto_notificacion").html("");
+            }
 		}
                               
     </script>

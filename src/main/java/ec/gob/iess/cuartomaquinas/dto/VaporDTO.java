@@ -10,6 +10,8 @@ public class VaporDTO {
 	private Double flujo;
 	private Double presion;
 	private Double temperatura;
+	private Boolean alarma_alta_presion;
+	private Boolean alarma_baja_presion;
 	
 	public Date getFecha() {
 		return fecha;
@@ -46,5 +48,17 @@ public class VaporDTO {
 	}
 	public void setTemperatura(Double temperatura) {
 		this.temperatura = temperatura;
+	}
+	public Boolean getAlarma_alta_presion() {
+		return alarma_alta_presion;
+	}
+	public void setAlarma_alta_presion(Boolean alarma_alta_presion) {
+		this.alarma_alta_presion = alarma_alta_presion;
+	}
+	public Boolean getAlarma_baja_presion() {
+		return alarma_baja_presion;
+	}
+	public void setAlarma_baja_presion(Boolean alarma_baja_presion) {
+		this.alarma_baja_presion = alarma_baja_presion;
 	}
 }

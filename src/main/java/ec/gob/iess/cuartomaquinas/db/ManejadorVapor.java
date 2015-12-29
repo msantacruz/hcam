@@ -11,6 +11,40 @@ import ec.gob.iess.cuartomaquinas.dto.ConsumoVaporDTO;
 import ec.gob.iess.cuartomaquinas.dto.VaporDTO;
 
 public class ManejadorVapor {
+	
+	public List<VaporDTO> buscarUltimoValor() {
+		List<VaporDTO> lista = new ArrayList<VaporDTO>();
+		
+		Connection conn = null;
+
+		try {
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from vapor order by id desc limit 14");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				VaporDTO vaporDTO = new VaporDTO();
+				vaporDTO.setFecha(rs.getTimestamp("fecha"));
+				vaporDTO.setValvula(rs.getString("valvula"));
+				vaporDTO.setEstado(rs.getString("estado"));
+				vaporDTO.setFlujo(rs.getDouble("flujo"));
+				vaporDTO.setPresion(rs.getDouble("presion"));
+				vaporDTO.setTemperatura(rs.getDouble("temperatura"));
+				vaporDTO.setAlarma_alta_presion(rs.getBoolean("alarma_alta_presion"));
+				vaporDTO.setAlarma_baja_presion(rs.getBoolean("alarma_baja_presion"));
+				lista.add(vaporDTO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lista;
+	}
 
 	public List<VaporDTO> buscarEstadistica(int mes, int anio) {
 

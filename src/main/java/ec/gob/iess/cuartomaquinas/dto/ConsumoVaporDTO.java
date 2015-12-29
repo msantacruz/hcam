@@ -19,6 +19,7 @@ public class ConsumoVaporDTO {
 	private Double consumo_cb2_cb4;
 	private Double consumo_cb3_cb5;
 	private Double consumo_quemados;
+	
 	public Double getConsumo_total() {
 		return consumo_total;
 	}
