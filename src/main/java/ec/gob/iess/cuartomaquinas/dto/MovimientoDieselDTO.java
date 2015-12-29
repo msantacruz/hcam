@@ -34,7 +34,7 @@ public class MovimientoDieselDTO {
 	private Integer total_fraccgalont2;
 	private Integer pedido_tanque;
 	private Integer tanque_uso;
-	
+	private Integer modo;
 	
 	public Date getFecha() {
 		return fecha;
@@ -215,5 +215,11 @@ public class MovimientoDieselDTO {
 	}
 	public void setTanque_uso(Integer tanque_uso) {
 		this.tanque_uso = tanque_uso;
+	}
+	public Integer getModo() {
+		return modo;
+	}
+	public void setModo(Integer modo) {
+		this.modo = modo;
 	}
 }

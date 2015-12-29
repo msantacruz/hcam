@@ -56,6 +56,7 @@ public class ManejadorDiesel {
 				movimientoDieselDTO.setTotal_fraccgalont2(rs.getInt("total_fraccgalont2"));
 				movimientoDieselDTO.setPedido_tanque(rs.getInt("pedido_tanque"));
 				movimientoDieselDTO.setTanque_uso(rs.getInt("tanque_uso"));
+				movimientoDieselDTO.setModo(rs.getInt("modo"));
 				
 			}
 		} catch (SQLException e) {

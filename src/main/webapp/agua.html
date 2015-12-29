@@ -469,7 +469,28 @@
             var hour = date.getHours();
             var minutes = date.getMinutes();
             $("#fecha").html(day + "-" + monthNames[monthIndex] + "-" + year + " " + hour + ":" + minutes);
+            
+            if(monthIndex=="3" || monthIndex=="7" || monthIndex=="11"){
+            	if (monthIndex=="3" && day<="15") {
+                	$("#notificacion").show();
+    				$("#texto_notificacion").html("Mantenimiento Bomba1");
+                }
+            	if (monthIndex=="7" && day<="15") {
+                	$("#notificacion").show();
+    				$("#texto_notificacion").html("Mantenimiento Bomba2");
+                }
+            	if (monthIndex=="11" && day<="15") {
+                	$("#notificacion").show();
+    				$("#texto_notificacion").html("Mantenimiento Bomba3");
+                }
+            }else {
+            	$("#notificacion").hide();
+				$("#texto_notificacion").html("");
+            }
+
 		}
+		
+		
 	</script>
             
 </body>

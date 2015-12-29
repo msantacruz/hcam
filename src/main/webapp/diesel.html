@@ -340,6 +340,7 @@
 				var alarma_alto_tanque2 = 0;
 				var alarma_paro_emergencia = 0;
 				var pedido_tanque = 0;
+				var modo_ingreso = 0;
 				var tanque_uso_indicador = 0;
 				var textos_alarmas = "";
 				var indicaciones_alarmas = "";
@@ -416,6 +417,9 @@
 					if (nombre == "tanque_uso") {
 						tanque_uso_indicador = valor;
 					}
+					if (nombre == "modo") {
+						modo_ingreso = valor;
+					}
 				});
 				if (alarma_bajo_tanque1 == 10) {
 					banAlarmas = true;
@@ -470,6 +474,14 @@
 				}
 				if (tanque_uso_indicador == 2){
 					$("#tanque2").html("TANQUE 2 EN OPERACI&Oacute;N");
+				}
+				if (modo_ingreso == 2){
+					$("#texto_cuadro_dialogo").html("Ingreso de combustible");
+					$("#texto_indicacion_alarma").html("Bomba de ingreso en modo de autom&aacute;tico");
+				}
+				if (modo_ingreso == 3){
+					$("#texto_cuadro_dialogo").html("Ingreso de combustible");
+					$("#texto_indicacion_alarma").html("Bomba de ingreso en modo de manual");
 				}
 
 			}).fail(function() { //on failure
