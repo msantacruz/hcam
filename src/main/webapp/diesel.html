@@ -347,12 +347,12 @@
 				var dialogos_alarmas = "";
 				
 				$.each(resp, function(nombre, valor) {
-					if (nombre == "total_galont1") {
+					if (nombre == "valor_total_tanque1") {
 						$("#texto_tanque1").html(valor + " Galones");
 						$("#total_galont1").industrial(valor);
 						volument1 = valor;
 					}
-					if (nombre == "total_galont2") {
+					if (nombre == "valor_total_tanque2") {
 						$("#texto_tanque2").html(valor + " Galones");
 						$("#total_galont2").industrial(valor);
 						volument2 = valor;
@@ -361,16 +361,16 @@
 						$("#texto_temperatura").html(valor + "&#176; C");
 						$("#temperatura").industrial(valor);
 					}
-					if (nombre == "galones_entrada") {
+					if (nombre == "valor_total_entrada") {
 						$("#galones_entrada").html(valor + " Galones");
 					}
-					if (nombre == "flujo_entrada") {
+					if (nombre == "valor_flujo_entrada") {
 						$("#flujo_entrada").html(valor + " GPM");
 					}
-					if (nombre == "galones_salida") {
+					if (nombre == "valor_total_salida") {
 						$("#galones_salida").html(valor + " Galones");
 					}
-					if (nombre == "flujo_salida") {
+					if (nombre == "valor_flujo_salida") {
 						$("#flujo_salida").html(valor + " GPM");
 					}
 					if (nombre == "bomba_ingreso") {
@@ -396,8 +396,7 @@
 						}
 					}
 					if (nombre == "bajo_tanque1") {
-						alarma_bajo_tanque1 = valor;
-						
+						alarma_bajo_tanque1 = valor;	
 					}
 					if (nombre == "alto_tanque1") {
 						alarma_alto_tanque1 = valor;
@@ -476,12 +475,10 @@
 					$("#tanque2").html("TANQUE 2 EN OPERACI&Oacute;N");
 				}
 				if (modo_ingreso == 2){
-					$("#texto_cuadro_dialogo").html("Ingreso de combustible");
-					$("#texto_indicacion_alarma").html("Bomba de ingreso en modo de autom&aacute;tico");
+					$("#texto_cuadro_dialogo").html("Bomba de ingreso en modo de autom&aacute;tico");
 				}
 				if (modo_ingreso == 3){
-					$("#texto_cuadro_dialogo").html("Ingreso de combustible");
-					$("#texto_indicacion_alarma").html("Bomba de ingreso en modo de manual");
+					$("#texto_cuadro_dialogo").html("Bomba de ingreso en modo de manual");
 				}
 
 			}).fail(function() { //on failure

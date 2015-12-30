@@ -153,6 +153,8 @@
 												<th>Flujo</th>
 												<th>Presi&oacute;n</th>
 												<th>Temperatura</th>
+												<th>Alarma Alta Presi&oacute;n</th>
+												<th>Alarma Baja Presi&oacute;n</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -181,6 +183,8 @@
 												<td><%=vapor.getFlujo()%> Kg/hora</td>
 												<td><%=vapor.getPresion()%> PSI</td>
 												<td><%=vapor.getTemperatura()%> &#176; C</td>
+												<td><% if (vapor.getAlarma_alta_presion()) out.println("Activo"); else out.println("Inactivo");%></td>
+												<td><% if (vapor.getAlarma_baja_presion()) out.println("Activo"); else out.println("Inactivo");%></td>
 
 											</tr>
 											<%
@@ -195,6 +199,8 @@
 												<th>Flujo</th>
 												<th>Presi&oacute;n</th>
 												<th>Temperatura</th>
+												<th>Alarma Alta Presi&oacute;n</th>
+												<th>Alarma Baja Presi&oacute;n</th>
 
 
 											</tr>

@@ -67,6 +67,8 @@ public class ManejadorVapor {
 				vaporDTO.setPresion(rs.getDouble("presion"));
 				vaporDTO.setTemperatura(rs.getDouble("temperatura"));
 				vaporDTO.setValvula(rs.getString("valvula"));
+				vaporDTO.setAlarma_alta_presion(rs.getBoolean("alarma_alta_presion"));
+				vaporDTO.setAlarma_baja_presion(rs.getBoolean("alarma_baja_presion"));
 				lista.add(vaporDTO);
 			}
 		} catch (SQLException e) {

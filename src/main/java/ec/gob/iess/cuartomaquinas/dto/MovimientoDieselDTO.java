@@ -1,5 +1,6 @@
 package ec.gob.iess.cuartomaquinas.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class MovimientoDieselDTO {
@@ -35,6 +36,15 @@ public class MovimientoDieselDTO {
 	private Integer pedido_tanque;
 	private Integer tanque_uso;
 	private Integer modo;
+	private BigDecimal valor_total_entrada;
+	private BigDecimal valor_total_salida;
+	private BigDecimal valor_total_tanque1;
+	private BigDecimal valor_total_tanque2;
+	private BigDecimal valor_flujo_entrada;
+	private BigDecimal valor_flujo_salida;
+	private BigDecimal valor_total_acumulado;
+	
+	
 	
 	public Date getFecha() {
 		return fecha;
@@ -221,5 +231,47 @@ public class MovimientoDieselDTO {
 	}
 	public void setModo(Integer modo) {
 		this.modo = modo;
+	}
+	public BigDecimal getValor_total_entrada() {
+		return valor_total_entrada;
+	}
+	public void setValor_total_entrada(BigDecimal valor_total_entrada) {
+		this.valor_total_entrada = valor_total_entrada;
+	}
+	public BigDecimal getValor_total_salida() {
+		return valor_total_salida;
+	}
+	public void setValor_total_salida(BigDecimal valor_total_salida) {
+		this.valor_total_salida = valor_total_salida;
+	}
+	public BigDecimal getValor_total_tanque1() {
+		return valor_total_tanque1;
+	}
+	public void setValor_total_tanque1(BigDecimal valor_total_tanque1) {
+		this.valor_total_tanque1 = valor_total_tanque1;
+	}
+	public BigDecimal getValor_total_tanque2() {
+		return valor_total_tanque2;
+	}
+	public void setValor_total_tanque2(BigDecimal valor_total_tanque2) {
+		this.valor_total_tanque2 = valor_total_tanque2;
+	}
+	public BigDecimal getValor_flujo_entrada() {
+		return valor_flujo_entrada;
+	}
+	public void setValor_flujo_entrada(BigDecimal valor_flujo_entrada) {
+		this.valor_flujo_entrada = valor_flujo_entrada;
+	}
+	public BigDecimal getValor_flujo_salida() {
+		return valor_flujo_salida;
+	}
+	public void setValor_flujo_salida(BigDecimal valor_flujo_salida) {
+		this.valor_flujo_salida = valor_flujo_salida;
+	}
+	public BigDecimal getValor_total_acumulado() {
+		return valor_total_acumulado;
+	}
+	public void setValor_total_acumulado(BigDecimal valor_total_acumulado) {
+		this.valor_total_acumulado = valor_total_acumulado;
 	}
 }

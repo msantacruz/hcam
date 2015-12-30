@@ -1,5 +1,6 @@
 package ec.gob.iess.cuartomaquinas.db;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +58,33 @@ public class ManejadorDiesel {
 				movimientoDieselDTO.setPedido_tanque(rs.getInt("pedido_tanque"));
 				movimientoDieselDTO.setTanque_uso(rs.getInt("tanque_uso"));
 				movimientoDieselDTO.setModo(rs.getInt("modo"));
-				
+				BigDecimal entero = rs.getBigDecimal("flujo_entrada");
+				BigDecimal fraccion = rs.getBigDecimal("fracc_flujoentrada");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_flujo_entrada(entero.add(fraccion));
+				entero = rs.getBigDecimal("flujo_salida");
+				fraccion = rs.getBigDecimal("fracc_flujosalida");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_flujo_salida(entero.add(fraccion));
+				entero = rs.getBigDecimal("galones_salida");
+				fraccion = rs.getBigDecimal("fracc_galonsalida");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_salida(entero.add(fraccion));
+				entero = rs.getBigDecimal("galones_entrada");
+				fraccion = rs.getBigDecimal("fracc_galonentrada");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_entrada(entero.add(fraccion));
+				entero = rs.getBigDecimal("total_galont1");
+				fraccion = rs.getBigDecimal("total_fraccgalont1");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque1(entero.add(fraccion));
+				entero = rs.getBigDecimal("total_galont2");
+				fraccion = rs.getBigDecimal("total_fraccgalont2");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque2(entero.add(fraccion));
+				entero = rs.getBigDecimal("valor_total_tanque1");
+				fraccion = rs.getBigDecimal("valor_total_tanque2");
+				movimientoDieselDTO.setValor_total_acumulado(entero.add(fraccion));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,21 +98,35 @@ public class ManejadorDiesel {
 		return movimientoDieselDTO;
 	}
 	
-	/*public EstadoBombasDTO buscarUltimoValorBombas() {
-		EstadoBombasDTO estadoBombasDTO = new EstadoBombasDTO();
 
+	
+	public List<MovimientoDieselDTO> buscarEstadisticaIngresos (int mes, int anio){
+		List<MovimientoDieselDTO> lista = new ArrayList<MovimientoDieselDTO>();
 		Connection conn = null;
-
-		try {
+		
+		try{
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from estado_bombas_diesel order by id desc limit 1");
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_ingreso = 10");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				estadoBombasDTO.setBomba1(rs.getBoolean("bomba1"));
-				estadoBombasDTO.setBomba2(rs.getBoolean("bomba2"));
+			while (rs.next()){
+				MovimientoDieselDTO movimientoDieselDTO = new MovimientoDieselDTO();
+				movimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
+				movimientoDieselDTO.setTemperatura(rs.getInt("temperatura"));
+				BigDecimal entero = rs.getBigDecimal("flujo_entrada");
+				BigDecimal fraccion = rs.getBigDecimal("fracc_flujoentrada");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_flujo_entrada(entero.add(fraccion));;
+				entero = rs.getBigDecimal("galones_entrada");
+				fraccion = rs.getBigDecimal("fracc_galonentrada");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_entrada(entero.add(fraccion));
+				movimientoDieselDTO.setPedido_tanque(rs.getInt("pedido_tanque"));
+				lista.add(movimientoDieselDTO);
 			}
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -94,112 +135,94 @@ public class ManejadorDiesel {
 				e.printStackTrace();
 			}
 		}
-		return estadoBombasDTO;
-	}*/
-	
-	public List<EstadisticaMovimientoDieselDTO> buscarEstadistica(int mes, int anio){
+		return lista;
+	}
+	public List<MovimientoDieselDTO> buscarEstadisticaSalidas (int mes, int anio){
+		List<MovimientoDieselDTO> lista = new ArrayList<MovimientoDieselDTO>();
+		Connection conn = null;
 		
-		List<EstadisticaMovimientoDieselDTO>lista = new ArrayList<EstadisticaMovimientoDieselDTO>(); 
-
-			Connection conn = null;
-
-			try {
-				conn = GestorConexion.obtenerConexion();
-				PreparedStatement ps = conn
-						.prepareStatement("select * from movimiento_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ?");
-				ps.setInt(1, anio);
-				ps.setInt(2, mes);
-				ResultSet rs = ps.executeQuery();
-				while (rs.next()) {
-					EstadisticaMovimientoDieselDTO estadisticaMovimientoDieselDTO = new EstadisticaMovimientoDieselDTO();
-					estadisticaMovimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
-					estadisticaMovimientoDieselDTO.setAcumuladoTanque1(rs.getDouble("acumulado_tanque1"));
-					estadisticaMovimientoDieselDTO.setAcumuladoTanque2(rs.getDouble("acumulado_tanque2"));
-					estadisticaMovimientoDieselDTO.setTotal(rs.getDouble("acumulado_tanque1") + rs.getDouble("acumulado_tanque2"));
-					estadisticaMovimientoDieselDTO.setDescarga(rs.getDouble("descarga"));
-					estadisticaMovimientoDieselDTO.setTemperatura(rs.getDouble("temperatura"));
-					estadisticaMovimientoDieselDTO.setSalida(rs.getDouble("salida"));
-					estadisticaMovimientoDieselDTO.setAlarma(rs.getString("alarma"));
-					lista.add(estadisticaMovimientoDieselDTO);
-					
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			return lista;
-		}
-	public List<ConsumoDieselDTO> buscarConsumo(int mes, int anio){
-		
-		List<ConsumoDieselDTO>lista = new ArrayList<ConsumoDieselDTO>(); 
-
-			Connection conn = null;
-
-			try {
-				conn = GestorConexion.obtenerConexion();
-
-				Calendar mycal = new GregorianCalendar(anio, mes, 1);
-
-				int diasDelMes = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
-				
-				for(int i=1; i<+diasDelMes; i++) {
-					PreparedStatement ps = conn
-							.prepareStatement("select * from movimiento_diesel where date_part('year',fecha) = ? "
-									+ " and date_part('month',fecha) = ? and date_part('day',fecha) = ? order by fecha desc limit 1");
-					ps.setInt(1, anio);
-					ps.setInt(2, mes);
-					ps.setInt(3, i);
-					ResultSet rs = ps.executeQuery();
-					if (rs.next()) {
-						ConsumoDieselDTO consumoDieselDTO = new ConsumoDieselDTO();
-						consumoDieselDTO.setFecha(rs.getTimestamp("fecha"));
-						consumoDieselDTO.setTotal(rs.getDouble("acumulado_tanque1") + rs.getDouble("acumulado_tanque2"));
-						lista.add(consumoDieselDTO);
-					}	
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			return lista;
-		}
-	public List<ConsumoMesDieselDTO> buscarEstadistica2 (int mes, int anio){
-		   List<ConsumoMesDieselDTO> listaConsumoMes = new ArrayList<ConsumoMesDieselDTO> ();
-		   Connection conn = null;
 		try{
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from consumo_mes_diesel where date_part('year',fecha) = ?  and date_part('month',fecha) = ?  ");
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_tdiario = 10");
 			ps.setInt(1, anio);
 			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
-				ConsumoMesDieselDTO consumoMesDieselDTO = new ConsumoMesDieselDTO();
-				consumoMesDieselDTO.setFecha(rs.getTimestamp("fecha"));
-				consumoMesDieselDTO.setConsumo_total_mes(rs.getDouble("consumo_total_mes"));
-				listaConsumoMes.add(consumoMesDieselDTO);
+				MovimientoDieselDTO movimientoDieselDTO = new MovimientoDieselDTO();
+				movimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
+				BigDecimal entero = rs.getBigDecimal("flujo_salida");
+				BigDecimal fraccion = rs.getBigDecimal("fracc_flujosalida");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_flujo_salida(entero.add(fraccion));
+				entero = rs.getBigDecimal("galones_salida");
+				fraccion = rs.getBigDecimal("fracc_galonsalida");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_salida(entero.add(fraccion));
+				movimientoDieselDTO.setTanque_uso(rs.getInt("tanque_uso"));
+				lista.add(movimientoDieselDTO);
 			}
-			
-		}catch (SQLException e){
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			try{
+		} finally {
+			try {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return listaConsumoMes;
+		return lista;
 	}
+	public List<MovimientoDieselDTO> buscarEstadisticaAlarmas (int mes, int anio){
+		List<MovimientoDieselDTO> lista = new ArrayList<MovimientoDieselDTO>();
+		Connection conn = null;
+		
+		try{
+			conn = GestorConexion.obtenerConexion();
+			PreparedStatement ps = conn
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and (bajo_tanque1 = 10 or bajo_tanque2 = 10)");
+			ps.setInt(1, anio);
+			ps.setInt(2, mes);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				MovimientoDieselDTO movimientoDieselDTO = new MovimientoDieselDTO();
+				movimientoDieselDTO.setFecha(rs.getTimestamp("fecha"));
+				BigDecimal entero = rs.getBigDecimal("total_galont1");
+				BigDecimal fraccion = rs.getBigDecimal("total_fraccgalont1");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque1(entero.add(fraccion));
+				entero = rs.getBigDecimal("total_galont2");
+				fraccion = rs.getBigDecimal("total_fraccgalont2");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque2(entero.add(fraccion));
+				entero = rs.getBigDecimal("total_galont1");
+				fraccion = rs.getBigDecimal("total_fraccgalont1");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque1(entero.add(fraccion));
+				entero = rs.getBigDecimal("total_galont2");
+				fraccion = rs.getBigDecimal("total_fraccgalont2");
+				fraccion = fraccion.divide(new BigDecimal (100));
+				movimientoDieselDTO.setValor_total_tanque2(entero.add(fraccion));
+				movimientoDieselDTO.setValor_total_acumulado(movimientoDieselDTO.getValor_total_tanque1().add(movimientoDieselDTO.getValor_total_tanque2()));
+				movimientoDieselDTO.setBajo_tanque1(rs.getInt("bajo_tanque1"));
+				movimientoDieselDTO.setBajo_tanque2(rs.getInt("bajo_tanque2"));
+				movimientoDieselDTO.setAlto_tanque1(rs.getInt("alto_tanque1"));
+				movimientoDieselDTO.setAlto_tanque2(rs.getInt("alto_tanque2"));
+				movimientoDieselDTO.setParo_emergencia(rs.getInt("Paro_emergencia"));
+				lista.add(movimientoDieselDTO);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lista;
+	}
+	
+	
+
 }

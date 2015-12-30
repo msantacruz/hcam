@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="ec.gob.iess.cuartomaquinas.dto.MovimientoDieselDTO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO"%>
@@ -145,7 +146,7 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Registro de la cantidad de Di&eacute;sel Almacenado, Valores de Ingreso o Salida de Combustlibe y Estado de Alarmas.</h5>
+                        <h5>Registro de Ingreso de Combustible Di&eacute;sel Fuel 2 a los Tanques de Almacenamiento Primario</h5>
                     </div>
                     <div class="ibox-content">
 
@@ -154,13 +155,10 @@
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Evento</th>
                         <th>Cantidad</th>
-                        <th>Tanque 1</th>
-                        <th>Tanque 2</th>
-                        <th>Total</th>
+                        <th>Flujo</th>
                         <th>Temperatura</th>
-                        <th>Alarma</th>
+                        <th>Ingres&oacute; a</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -177,20 +175,16 @@
 		           			anio= String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		           		}
                     	ManejadorDiesel manejadorDiesel = new ManejadorDiesel();
-                    	List<EstadisticaMovimientoDieselDTO> lista= manejadorDiesel.buscarEstadistica(Integer.parseInt(mes), Integer.parseInt(anio));
+                    	List<MovimientoDieselDTO> lista= manejadorDiesel.buscarEstadisticaIngresos(Integer.parseInt(mes), Integer.parseInt(anio));
                     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    	for(EstadisticaMovimientoDieselDTO diesel: lista) {
+                    	for(MovimientoDieselDTO diesel: lista) {
                     %>    
                     <tr>
                         <td><%= format.format(diesel.getFecha()) %></td>
-                        <td><%= diesel.getAcumuladoTanque1() %> GALONES</td>
-                        <td><%= diesel.getAcumuladoTanque2() %> GALONES</td>
-                        <td><%= diesel.getTotal() %> GALONES</td>
+                        <td><%= diesel.getValor_total_entrada() %> GALONES</td>
+                        <td><%= diesel.getValor_flujo_entrada() %> GPM</td>
                         <td><%= diesel.getTemperatura()  %> &#176; C</td>
-                        <td><%= diesel.getDescarga() %> GALONES <%= diesel.getTemperatura() %> &#176; C</td>
-                        <td><%= diesel.getSalida() %> GALONES</td>
-                        <td><%= diesel.getAlarma() %></td>
-                        
+                        <td><% if (diesel.getPedido_tanque() == 1 ) out.println("Tanque 1"); else out.println("Tanque 2");%></td>
                     </tr>
                     <%
                     	}
@@ -201,79 +195,115 @@
                     <tfoot>
                     <tr>
                         <th>Fecha y Hora</th>
-                        <th>Evento</th>
                         <th>Cantidad</th>
+                        <th>Flujo</th>
+                        <th>Temperatura</th>
+                        <th>Ingres&oacute; a</th>
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+               <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro de Salida de Combustible Di&eacute;sel Fuel 2 a Tanque Diario de Combustible</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Cantidad</th>
+                        <th>Flujo</th>
+                        <th>Sali&oacute; de</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+						
+						lista= manejadorDiesel.buscarEstadisticaSalidas(Integer.parseInt(mes), Integer.parseInt(anio));
+                    	for(MovimientoDieselDTO diesel: lista) {
+                    %>    
+                    <tr>
+                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= diesel.getValor_total_salida() %> GALONES</td>
+                        <td><%= diesel.getValor_flujo_salida() %> GPM</td>
+                        <td><% if (diesel.getTanque_uso() == 1 ) out.println("Tanque 1"); else out.println("Tanque 2");%></td>
+                    </tr>
+                    <%
+                    	}
+                    %>    
+                    
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Cantidad</th>
+                        <th>Flujo</th>
+                        <th>Sali&oacute; de</th>
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+          <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro de Alarmas de Combustible Di&eacute;sel Fuel 2</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha y Hora</th>
                         <th>Tanque 1</th>
                         <th>Tanque 2</th>
                         <th>Total</th>
-                        <th>Temperatura</th>
-                        <th>Alarma</th>
-                        
-                        
-                        
-                    </tr>
-                    </tfoot>
-                    </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            </div>
-            
-            <div class="row">
-            
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Estad&iacute;stica de Consumo de Di&eacute;sel</h5>   
-             		</div>
-                    <div class="ibox-content">
-                           <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-bar-chart"></div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            
-            </div>
-                <div class="row">
-                <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Registro del Consumo de Di&eacute;sel</h5>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Consumo</th>              
+                        <th>Alarmas</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <% 
-                    	ManejadorDiesel manejadorDieselConsumoTabla = new ManejadorDiesel();
-						List<ConsumoDieselDTO> listaConsumoTabla= manejadorDieselConsumoTabla.buscarConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
-						SimpleDateFormat formatoTabla = new SimpleDateFormat("yyyy-MM-dd");
-						for(ConsumoDieselDTO consumo_diesel: listaConsumoTabla) {                 		
-                    %> 
+                    <%
+						
+						lista= manejadorDiesel.buscarEstadisticaAlarmas(Integer.parseInt(mes), Integer.parseInt(anio));
+                    	for(MovimientoDieselDTO diesel: lista) {
+                    %>    
                     <tr>
-                        <td><%= formatoTabla.format(consumo_diesel.getFecha()) %></td>
-                        <td><%= consumo_diesel.getTotal() %> GALONES</td>
-
+                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= diesel.getValor_total_tanque1() %> GALONES</td>
+                        <td><%= diesel.getValor_total_tanque2() %> GALONES</td>
+                        <td><%= diesel.getValor_total_acumulado() %> GALONES</td>
+                        <td><% if (diesel.getBajo_tanque1() == 10) out.println("Bajo Tanque 1"); if (diesel.getBajo_tanque2() == 10) out.println("Bajo Tanque 2"); if (diesel.getAlto_tanque1() == 10) out.println("Alto Tanque 1"); if (diesel.getAlto_tanque2() == 10) out.println("Alto Tanque 2"); if (diesel.getParo_emergencia() == 10) out.println("Paro de emergencia");%></td>
                     </tr>
                     <%
                     	}
-                    %>       
+                    %>    
+                    
                     
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Consumo</th>    
+                        <th>Fecha y Hora</th>
+                        <th>Tanque 1</th>
+                        <th>Tanque 2</th>
+                        <th>Total</th>
+                        <th>Alarmas</th>
                     </tr>
                     </tfoot>
                     </table>
@@ -284,51 +314,7 @@
             </div>
             </div>
             
-            <div class="row">
-                <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Registro del Consumo Mensual de Diesel</h5>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Consumo</th>              
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% 
-                    	ManejadorDiesel manejadorDieselConsumoMesTabla = new ManejadorDiesel();
-						List<ConsumoMesDieselDTO> listaConsumoMesTabla= manejadorDieselConsumoMesTabla.buscarEstadistica2(Integer.parseInt(mes), Integer.parseInt(anio));
-						SimpleDateFormat formatoTablaMes = new SimpleDateFormat("yyyy-MM");
-						for(ConsumoMesDieselDTO consumo_mes_diesel: listaConsumoMesTabla) {                   		
-                    %> 
-                    <tr>
-                        <td><%= formatoTablaMes.format(consumo_mes_diesel.getFecha()) %></td>
-                        <td><%= consumo_mes_diesel.getConsumo_total_mes() %> Gal</td>
-                    </tr>
-                    <%
-                    	}
-                    %>       
-                    
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Consumo</th>    
-                    </tr>
-                    </tfoot>
-                    </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            </div> 
+            
             
         </div>
         <div class="footer">
@@ -440,17 +426,7 @@
             var barData = {
                 label: "bar",
                 data: [
-                    <%
-                	
-					ManejadorDiesel manejadorDieselConsumo = new ManejadorDiesel();
-					List<ConsumoDieselDTO> listaConsumo= manejadorDieselConsumo.buscarConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
-					SimpleDateFormat formato = new SimpleDateFormat("dd");
-					for(ConsumoDieselDTO consumo_diesel: listaConsumo) {
-				%> 
-            [<%= formato.format(consumo_diesel.getFecha()) %>,<%=consumo_diesel.getTotal()%>],
-            	<%
-                	}
-                %>  
+                    
             ]
             };
             $.plot($("#flot-bar-chart"), [barData], barOptions);
