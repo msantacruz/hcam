@@ -476,7 +476,7 @@
 	
         var refreshId = setInterval(function(){
         	actualizarVapor();
-            setTimeout(actualizarFecha(),2000);
+            
             
         },2000);
         $.ajaxSetup({ cache : false });
@@ -715,7 +715,10 @@
         		
         	}).fail(function() { //on failure
 				alert("Falló la petición");
+			}).done(function() { 
+				actualizarFecha();
 			});
+        	
         }
 
 
@@ -786,12 +789,12 @@
     				$("#texto_notificacion").html("");
     				banNotificacion= true;
     				}
-        }else{
+        }/*else{
          	$("#notificacion").hide();
 				$("#texto_notificacion").html("");
 				$("#texto_cuadro_dialogo").html("");
 				$("#texto_indicacion_alarma").html("");
-        }
+        }*/
         if(banAlarmasOff == true && banNotificacion == true){
             	$("#texto_cuadro_dialogo").html("");
 				$("#texto_indicacion_alarma").html("");
