@@ -345,6 +345,10 @@
 				var textos_alarmas = "";
 				var indicaciones_alarmas = "";
 				var dialogos_alarmas = "";
+				var valor_galones_entrada = 0;
+				var valor_flujo_entrada = 0;
+				var valor_galones_salida = 0;
+				var valor_flujo_salida = 0;
 				
 				$.each(resp, function(nombre, valor) {
 					if (nombre == "valor_total_tanque1") {
@@ -362,26 +366,32 @@
 						$("#valor_total_temperatura").industrial(valor);
 					}
 					if (nombre == "valor_total_entrada") {
-						$("#galones_entrada").html(valor + " Galones");
+						valor_galones_entrada = valor;
 					}
 					if (nombre == "valor_flujo_entrada") {
-						$("#flujo_entrada").html(valor + " GPM");
+						valor_flujo_entrada = valor;
 					}
 					if (nombre == "valor_total_salida") {
-						$("#galones_salida").html(valor + " Galones");
+						valor_galones_salida = valor;
+						
 					}
 					if (nombre == "valor_flujo_salida") {
-						$("#flujo_salida").html(valor + " GPM");
+						valor_flujo_salida = valor;
+						
 					}
 					if (nombre == "bomba_ingreso") {
 						if (valor == 10) {
 							$("#bomba_ingreso").attr("src",
 									"images/bomba_funcionando.gif");
 							$("#texto_bomba1").html("FUNCIONANDO");
+							$("#galones_entrada").html(valor_galones_entrada + " Galones");
+							$("#flujo_entrada").html(valor_flujo_entrada + " GPM");
 						} else {
 							$("#bomba_ingreso").attr("src",
 									"images/bomba_parada.png");
 							$("#texto_bomba1").html("APAGADA");
+							$("#galones_entrada").html("");
+							$("#flujo_entrada").html("");
 						}
 					}
 					if (nombre == "bomba_tdiario") {
@@ -389,10 +399,14 @@
 							$("#bomba_tdiario").attr("src",
 									"images/bomba_funcionando.gif");
 							$("#texto_bomba2").html("FUNCIONANDO");
+							$("#galones_salida").html(valor_galones_salida + " Galones");
+							$("#flujo_salida").html(valor_flujo_salida + " GPM");
 						} else {
 							$("#bomba_tdiario").attr("src",
 									"images/bomba_parada.png");
 							$("#texto_bomba2").html("APAGADA");
+							$("#galones_salida").html("");
+							$("#flujo_salida").html("");
 						}
 					}
 					if (nombre == "bajo_tanque1") {
