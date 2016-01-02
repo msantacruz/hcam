@@ -349,6 +349,8 @@
 				var valor_flujo_entrada = 0;
 				var valor_galones_salida = 0;
 				var valor_flujo_salida = 0;
+				var bomba_ingreso_funcionando = false;
+				var bomba_salida_funcionando = false;
 				
 				$.each(resp, function(nombre, valor) {
 					if (nombre == "valor_total_tanque1") {
@@ -381,32 +383,12 @@
 					}
 					if (nombre == "bomba_ingreso") {
 						if (valor == 10) {
-							$("#bomba_ingreso").attr("src",
-									"images/bomba_funcionando.gif");
-							$("#texto_bomba1").html("FUNCIONANDO");
-							$("#galones_entrada").html(valor_galones_entrada + " Galones");
-							$("#flujo_entrada").html(valor_flujo_entrada + " GPM");
-						} else {
-							$("#bomba_ingreso").attr("src",
-									"images/bomba_parada.png");
-							$("#texto_bomba1").html("APAGADA");
-							$("#galones_entrada").html("");
-							$("#flujo_entrada").html("");
-						}
+							bomba_ingreso_funcionando = true;
+						} 
 					}
 					if (nombre == "bomba_tdiario") {
 						if (valor == 10) {
-							$("#bomba_tdiario").attr("src",
-									"images/bomba_funcionando.gif");
-							$("#texto_bomba2").html("FUNCIONANDO");
-							$("#galones_salida").html(valor_galones_salida + " Galones");
-							$("#flujo_salida").html(valor_flujo_salida + " GPM");
-						} else {
-							$("#bomba_tdiario").attr("src",
-									"images/bomba_parada.png");
-							$("#texto_bomba2").html("APAGADA");
-							$("#galones_salida").html("");
-							$("#flujo_salida").html("");
+							bomba_salida_funcionando = true;
 						}
 					}
 					if (nombre == "bajo_tanque1") {
@@ -499,6 +481,32 @@
 				}
 				if(alarma_bajo_tanque1 && volument2 <= 300){
 					$("#texto_indicacion_alarma").html("Racionalizar el consumo de combustible");
+				}
+				if (bomba_ingreso_funcionando == true) {
+					$("#bomba_ingreso").attr("src",
+							"images/bomba_funcionando.gif");
+					$("#texto_bomba1").html("FUNCIONANDO");
+					$("#galones_entrada").html(valor_galones_entrada + " Galones");
+					$("#flujo_entrada").html(valor_flujo_entrada + " GPM");
+				} else {
+					$("#bomba_ingreso").attr("src",
+							"images/bomba_parada.png");
+					$("#texto_bomba1").html("APAGADA");
+					$("#galones_entrada").html("");
+					$("#flujo_entrada").html("");
+				}
+				if (bomba_salida_funcionando == true) {
+					$("#bomba_tdiario").attr("src",
+							"images/bomba_funcionando.gif");
+					$("#texto_bomba2").html("FUNCIONANDO");
+					$("#galones_salida").html(valor_galones_salida + " Galones");
+					$("#flujo_salida").html(valor_flujo_salida + " GPM");
+				} else {
+					$("#bomba_tdiario").attr("src",
+							"images/bomba_parada.png");
+					$("#texto_bomba2").html("APAGADA");
+					$("#galones_salida").html("");
+					$("#flujo_salida").html("");
 				}
 
 			}).fail(function() { //on failure
