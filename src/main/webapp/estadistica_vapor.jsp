@@ -1197,7 +1197,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1250,7 +1250,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1303,7 +1303,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1357,7 +1357,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1410,7 +1410,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1463,7 +1463,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1516,7 +1516,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1569,7 +1569,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1622,7 +1622,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1675,7 +1675,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1728,7 +1728,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1781,7 +1781,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1834,7 +1834,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
@@ -1887,7 +1887,7 @@
 				},
 				tooltip : true,
 				tooltipOpts : {
-					content : "dia: %x, galones: %y"
+					content : "dia: %x, Kg: %y"
 				}
 			};
 			var barData = {
