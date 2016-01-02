@@ -5,16 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import ec.gob.iess.cuartomaquinas.dto.ConsumoDieselDTO;
-import ec.gob.iess.cuartomaquinas.dto.ConsumoMesDieselDTO;
-import ec.gob.iess.cuartomaquinas.dto.EstadisticaMovimientoDieselDTO;
 //import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
 import ec.gob.iess.cuartomaquinas.dto.MovimientoDieselDTO;
+import ec.gob.iess.cuartomaquinas.dto.ReplicacionConsumoDieselDTO;
 
 public class ManejadorDiesel {
 
@@ -223,6 +220,108 @@ public class ManejadorDiesel {
 		return lista;
 	}
 	
+	public Boolean guardarRegistrosConsumoDiesel(List<ReplicacionConsumoDieselDTO> lista) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		PreparedStatement psVerificacion = null;
+		PreparedStatement psUpdate = null;
+		ResultSet rs = null;
+		try {
+			conn = GestorConexion.obtenerConexion();
+			psVerificacion =  conn.prepareStatement("select * from consumo_diesel where id=?");
+			ps = conn
+					.prepareStatement("INSERT INTO consumo_diesel(id, fecha, consumo)"
+							+ " VALUES (?, ?, ?)");
+			psUpdate = conn
+					.prepareStatement("update consumo_diesel set id=?, fecha=?, consumo=?");
+			for(ReplicacionConsumoDieselDTO replicDiesel: lista) {
+				psVerificacion.setLong(1, replicDiesel.getId());
+				rs = psVerificacion.executeQuery();
+				if (rs.next()) {
+					psUpdate.setLong(1, replicDiesel.getId());
+					psUpdate.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
+					psUpdate.setBigDecimal(3, replicDiesel.getConsumo());
+					psUpdate.executeUpdate();	
+				} else {
+					ps.setLong(1, replicDiesel.getId());
+					ps.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
+					ps.setBigDecimal(3, replicDiesel.getConsumo());
+					ps.executeUpdate();	
+				}
+					
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (ps != null) 
+					ps.close();
+				if (psVerificacion != null) 
+					psVerificacion.close();
+				if (psUpdate != null) 
+					psUpdate.close();
+				if (rs != null) 
+					rs.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
+	public Boolean guardarRegistrosConsumoMesDiesel(List<ReplicacionConsumoDieselDTO> lista) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		PreparedStatement psVerificacion = null;
+		PreparedStatement psUpdate = null;
+		ResultSet rs = null;
+		try {
+			conn = GestorConexion.obtenerConexion();
+			psVerificacion =  conn.prepareStatement("select * from consumo_mes_diesel where id=?");
+			ps = conn
+					.prepareStatement("INSERT INTO consumo_mes_diesel(id, fecha, consumo_total_mes)"
+							+ " VALUES (?, ?, ?)");
+			psUpdate = conn
+					.prepareStatement("update consumo_mes_diesel set id=?, fecha=?, consumo_total_mes=?");
+			for(ReplicacionConsumoDieselDTO replicDiesel: lista) {
+				psVerificacion.setLong(1, replicDiesel.getId());
+				rs = psVerificacion.executeQuery();
+				if (rs.next()) {
+					psUpdate.setLong(1, replicDiesel.getId());
+					psUpdate.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
+					psUpdate.setBigDecimal(3, replicDiesel.getConsumo());
+					psUpdate.executeUpdate();
+				} else {
+					ps.setLong(1, replicDiesel.getId());
+					ps.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
+					ps.setBigDecimal(3, replicDiesel.getConsumo());
+					ps.executeUpdate();	
+				}
+					
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (ps != null) 
+					ps.close();
+				if (psVerificacion != null) 
+					psVerificacion.close();
+				if (psUpdate != null) 
+					psUpdate.close();
+				if (rs != null) 
+					rs.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }
