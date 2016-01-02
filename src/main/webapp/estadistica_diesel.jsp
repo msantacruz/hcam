@@ -7,6 +7,7 @@
 <%@page import="ec.gob.iess.cuartomaquinas.dto.ConsumoMesDieselDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ec.gob.iess.cuartomaquinas.db.ManejadorDiesel"%>
+<%@page import="java.text.DecimalFormat"%>
 <html>
 
 <head>
@@ -314,6 +315,117 @@
             </div>
             </div>
             
+            <div class="row">
+            
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Estad&iacute;stica de Consumo de Diesel</h5>   
+             		</div>
+                    <div class="ibox-content">
+                           <div class="flot-chart">     
+                                <div class="flot-chart-content" id="flot-bar-chart"></div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del consumo de Diesel</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorDiesel manejadorDieselConsumoTabla = new ManejadorDiesel();
+						List<ConsumoDieselDTO> listaConsumoTabla= manejadorDieselConsumoTabla.buscarEstadisticaConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
+						SimpleDateFormat formatoTabla = new SimpleDateFormat("yyyy-MM-dd");
+						DecimalFormat formatter = new DecimalFormat("#,###.00");
+						for(ConsumoDieselDTO consumo_diesel: listaConsumoTabla) {                   		
+                    %> 
+                    <tr>
+                        <td><%= formatoTabla.format(consumo_diesel.getFecha()) %></td>
+                        <td><%= formatter.format(consumo_diesel.getConsumo()) %> Gal</td>
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+             <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Registro del Consumo Mensual de Diesel</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>              
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                    	ManejadorDiesel manejadorDieselConsumoMesTabla = new ManejadorDiesel();
+						List<ConsumoMesDieselDTO> listaConsumoMesTabla= manejadorDieselConsumoMesTabla.buscarEstadisticaConsumoMes(Integer.parseInt(anio));
+						SimpleDateFormat formatoTablaMes = new SimpleDateFormat("yyyy-MM");
+						DecimalFormat formatterMes = new DecimalFormat("#,###.00");
+						for(ConsumoMesDieselDTO consumo_mes_diesel: listaConsumoMesTabla) {                   		
+                    %> 
+                    <tr>
+                        <td><%= formatoTablaMes.format(consumo_mes_diesel.getFecha()) %></td>
+                        <td><%= formatterMes.format(consumo_mes_diesel.getConsumo_total_mes()) %> Gal</td>
+                    </tr>
+                    <%
+                    	}
+                    %>       
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Consumo</th>    
+                    </tr>
+                    </tfoot>
+                    </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>    
+            
             
             
         </div>
@@ -426,6 +538,17 @@
             var barData = {
                 label: "bar",
                 data: [
+							<%
+
+								ManejadorDiesel manejadorDieselConsumo = new ManejadorDiesel();
+								List<ConsumoDieselDTO> listaConsumo= manejadorDieselConsumo.buscarEstadisticaConsumo(Integer.parseInt(mes), Integer.parseInt(anio));
+								SimpleDateFormat formato = new SimpleDateFormat("dd");
+								for(ConsumoDieselDTO consumo_diesel: listaConsumo) {
+								%> 
+								[<%= formato.format(consumo_diesel.getFecha()) %>,<%=consumo_diesel.getConsumo()%>],
+								<%
+								}
+							%>  
                     
             ]
             };

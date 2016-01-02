@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ConsumoDieselDTO {
 	private Date fecha;
-	private Double total;
+	private Double consumo;
 
 	
 	public Date getFecha() {
@@ -13,11 +13,11 @@ public class ConsumoDieselDTO {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Double getTotal() {
-		return total;
+	public Double getConsumo() {
+		return consumo;
 	}
-	public void setTotal(Double total) {
-		this.total = total;
+	public void setConsumo(Double consumo) {
+		this.consumo = consumo;
 	}	
 }
 
