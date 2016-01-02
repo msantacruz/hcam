@@ -12,6 +12,7 @@ import java.util.List;
 //import ec.gob.iess.cuartomaquinas.dto.EstadoBombasDTO;
 import ec.gob.iess.cuartomaquinas.dto.MovimientoDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.ReplicacionConsumoDieselDTO;
+import ec.gob.iess.cuartomaquinas.dto.ReplicacionDatosDieselDTO;
 
 public class ManejadorDiesel {
 
@@ -328,4 +329,67 @@ public class ManejadorDiesel {
 		}
 	}
 
+	public void guardarRegistrosDatosDiesel(ReplicacionDatosDieselDTO datosDiesel) {
+		
+		Connection conn = null;
+		PreparedStatement psInsert = null;
+		
+		try {
+			conn = GestorConexion.obtenerConexion();
+			psInsert = conn.prepareStatement("INSERT INTO datos_plc_diesel(id, fecha, temperatura, bajo_tanque1, alto_tanque1, bajo_tanque2, "
+					+ "alto_tanque2, pulsos_entrada, bomba_ingreso, frecuencia_entrada,bomba_tdiario, galones_salida, fracc_galonsalida, frecuencia_salida, "
+					+ "flujo_salida, fracc_flujosalida, galones_entrada, fracc_galonentrada, flujo_entrada, fracc_flujoentrada, paro_emergencia, inicio_galont1, "
+					+ "inicio_fraccgalont1, inicio_galont2, inicio_fraccgalont2, total_galont1, total_fraccgalont1, total_galont2, total_fraccgalont2, pedido_tanque, "
+					+ "tanque_uso, modo, reset_ingreso, consumo, fracc_consumo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			
+			psInsert.setLong(1, datosDiesel.getId());
+			psInsert.setTimestamp(2, new Timestamp(datosDiesel.getFecha().getTime()));
+			psInsert.setInt(3, datosDiesel.getTemperatura());
+			psInsert.setInt(4, datosDiesel.getBajo_tanque1());
+			psInsert.setInt(5, datosDiesel.getAlto_tanque1());
+			psInsert.setInt(6, datosDiesel.getBajo_tanque2());
+			psInsert.setInt(7, datosDiesel.getAlto_tanque2());
+			psInsert.setDouble(8, datosDiesel.getPulsos_entrada());
+			psInsert.setInt(9, datosDiesel.getBomba_ingreso());
+			psInsert.setInt(10, datosDiesel.getFrecuencia_entrada());
+			psInsert.setInt(11, datosDiesel.getBomba_tdiario());
+			psInsert.setInt(12, datosDiesel.getGalones_salida());
+			psInsert.setInt(13, datosDiesel.getFracc_galonsalida());
+			psInsert.setInt(14, datosDiesel.getFrecuencia_salida());
+			psInsert.setInt(15, datosDiesel.getFlujo_salida());
+			psInsert.setInt(16, datosDiesel.getFracc_flujosalida());
+			psInsert.setInt(17, datosDiesel.getGalones_entrada());
+			psInsert.setInt(18, datosDiesel.getFracc_galonentrada());
+			psInsert.setInt(19, datosDiesel.getFlujo_entrada());
+			psInsert.setInt(20, datosDiesel.getFracc_flujoentrada());
+			psInsert.setInt(21, datosDiesel.getParo_emergencia());
+			psInsert.setInt(22, datosDiesel.getInicio_galont1());
+			psInsert.setInt(23, datosDiesel.getInicio_fraccgalont1());
+			psInsert.setInt(24, datosDiesel.getInicio_galont2());
+			psInsert.setInt(25, datosDiesel.getInicio_fraccgalont2());
+			psInsert.setInt(26, datosDiesel.getTotal_galont1());
+			psInsert.setInt(27, datosDiesel.getTotal_fraccgalont1());
+			psInsert.setInt(28, datosDiesel.getTotal_galont2());
+			psInsert.setInt(29, datosDiesel.getTotal_fraccgalont2());
+			psInsert.setInt(30, datosDiesel.getPedido_tanque());
+			psInsert.setInt(31, datosDiesel.getTanque_uso());
+			psInsert.setInt(32, datosDiesel.getModo());
+			psInsert.setInt(33, datosDiesel.getResetIngreso());
+			psInsert.setInt(34, datosDiesel.getConsumo());
+			psInsert.setInt(35, datosDiesel.getFraccConsumo());
+			
+			psInsert.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (psInsert != null) 
+					psInsert.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) { }
+		}		
+	}
 }
