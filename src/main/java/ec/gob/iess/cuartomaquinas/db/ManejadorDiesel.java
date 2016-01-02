@@ -79,9 +79,13 @@ public class ManejadorDiesel {
 				fraccion = rs.getBigDecimal("total_fraccgalont2");
 				fraccion = fraccion.divide(new BigDecimal (100));
 				movimientoDieselDTO.setValor_total_tanque2(entero.add(fraccion));
-				entero = rs.getBigDecimal("valor_total_tanque1");
-				fraccion = rs.getBigDecimal("valor_total_tanque2");
-				movimientoDieselDTO.setValor_total_acumulado(entero.add(fraccion));
+				//entero = rs.getBigDecimal("valor_total_tanque1");
+				//fraccion = rs.getBigDecimal("valor_total_tanque2");
+				movimientoDieselDTO.setValor_total_acumulado(movimientoDieselDTO.getValor_total_tanque1().add(movimientoDieselDTO.getValor_total_tanque2()));
+				//movimientoDieselDTO.setValor_total_acumulado(entero.add(fraccion));
+				entero = rs.getBigDecimal("temperatura");
+				fraccion = entero.divide(new BigDecimal (10));
+				movimientoDieselDTO.setValor_total_temperatura(fraccion);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
