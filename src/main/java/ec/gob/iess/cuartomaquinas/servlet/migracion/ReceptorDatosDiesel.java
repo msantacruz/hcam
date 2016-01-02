@@ -2,6 +2,9 @@ package ec.gob.iess.cuartomaquinas.servlet.migracion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import ec.gob.iess.cuartomaquinas.db.ManejadorDiesel;
+import ec.gob.iess.cuartomaquinas.dto.ReplicacionConsumoDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.ReplicacionDatosDieselDTO;
 
 /**
@@ -44,12 +49,16 @@ public class ReceptorDatosDiesel extends HttpServlet {
 			  e.printStackTrace();
 		  }
 		  
-		  
+		  Type listType = new TypeToken<ArrayList<ReplicacionDatosDieselDTO>>() { }.getType();
+          
 		  Gson gSon=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		  ReplicacionDatosDieselDTO datosDiesel = gSon.fromJson(jb.toString(), ReplicacionDatosDieselDTO.class);
+		  List<ReplicacionDatosDieselDTO> lista = gSon.fromJson(jb.toString(), listType);
 		  
 		  ManejadorDiesel manejadorDiesel = new ManejadorDiesel();
-		  manejadorDiesel.guardarRegistrosDatosDiesel(datosDiesel);
+		  Boolean res = manejadorDiesel.guardarRegistrosDatosDiesel(lista);
+		  if (!res) {
+			  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		  }
 	}
 
 }
