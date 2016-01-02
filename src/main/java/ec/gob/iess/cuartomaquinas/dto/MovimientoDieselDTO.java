@@ -43,9 +43,11 @@ public class MovimientoDieselDTO {
 	private BigDecimal valor_flujo_entrada;
 	private BigDecimal valor_flujo_salida;
 	private BigDecimal valor_total_acumulado;
+	private BigDecimal valor_total_temperatura;
 	
 	
 	
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -273,5 +275,11 @@ public class MovimientoDieselDTO {
 	}
 	public void setValor_total_acumulado(BigDecimal valor_total_acumulado) {
 		this.valor_total_acumulado = valor_total_acumulado;
+	}
+	public BigDecimal getValor_total_temperatura() {
+		return valor_total_temperatura;
+	}
+	public void setValor_total_temperatura(BigDecimal valor_total_temperatura) {
+		this.valor_total_temperatura = valor_total_temperatura;
 	}
 }

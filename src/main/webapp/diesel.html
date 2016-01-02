@@ -242,7 +242,7 @@
 							</div>
 							<div class="ibox-content">
 								<center>
-									<div class="industrial thermometer size two" id="temperatura">
+									<div class="industrial thermometer size two" id="valor_total_temperatura">
 										<span class="ticks" data-amount="5" data-scale-freq="1"></span>
 										<div class="space"></div>
 										<div class="meter"></div>
@@ -303,7 +303,7 @@
 					tick_height : 3, //Percent height of each tick mark
 					digit_amount : 4, //Amount of digital readout digits
 				});
-				$("#temperatura").industrial({
+				$("#valor_total_temperatura").industrial({
 					default_value : false, //Strating value for component
 					low : 0, //Scale lower boundary
 					high : 60, //Scale upper boundary
@@ -357,9 +357,9 @@
 						$("#total_galont2").industrial(valor);
 						volument2 = valor;
 					}
-					if (nombre == "temperatura") {
+					if (nombre == "valor_total_temperatura") {
 						$("#texto_temperatura").html(valor + "&#176; C");
-						$("#temperatura").industrial(valor);
+						$("#valor_total_temperatura").industrial(valor);
 					}
 					if (nombre == "valor_total_entrada") {
 						$("#galones_entrada").html(valor + " Galones");
@@ -460,11 +460,11 @@
 					$("#alarma").hide();
 					$("#notificacion").hide();
 				}
-				if(pedido_tanque == 1 && volument1 <= 300){
+				if(pedido_tanque == 1 && volument1 <= 800){
 					$("#notificacion").show();
 					$("#texto_notificacion").html("Realizar el pedido de reabastecimiento de combustible para el Tanque1");
 				}
-				if(pedido_tanque == 2 && volument2 <= 300){
+				if(pedido_tanque == 2 && volument2 <= 800){
 					$("#notificacion").show();
 					$("#texto_notificacion").html("Realizar el pedido de reabastecimiento de combustible para el Tanque2");
 				}
@@ -479,6 +479,12 @@
 				}
 				if (modo_ingreso == 3){
 					$("#texto_cuadro_dialogo").html("Bomba de ingreso en modo de manual");
+				}
+				if(alarma_bajo_tanque2 && volument1 <= 300){
+					$("#texto_indicacion_alarma").html("Racionalizar el consumo de combustible");
+				}
+				if(alarma_bajo_tanque1 && volument2 <= 300){
+					$("#texto_indicacion_alarma").html("Racionalizar el consumo de combustible");
 				}
 
 			}).fail(function() { //on failure
