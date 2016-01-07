@@ -184,7 +184,7 @@
                         <td><%= format.format(diesel.getFecha()) %></td>
                         <td><%= diesel.getValor_total_entrada() %> GALONES</td>
                         <td><%= diesel.getValor_flujo_entrada() %> GPM</td>
-                        <td><%= diesel.getTemperatura()  %> &#176; C</td>
+                        <td><%= diesel.getValor_total_temperatura()  %> &#176; C</td>
                         <td><% if (diesel.getPedido_tanque() == 1 ) out.println("Tanque 1"); else out.println("Tanque 2");%></td>
                     </tr>
                     <%

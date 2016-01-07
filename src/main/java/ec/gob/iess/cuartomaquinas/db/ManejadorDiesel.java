@@ -130,6 +130,9 @@ public class ManejadorDiesel {
 				fraccion = fraccion.divide(new BigDecimal (100));
 				movimientoDieselDTO.setValor_total_entrada(entero.add(fraccion));
 				movimientoDieselDTO.setPedido_tanque(rs.getInt("pedido_tanque"));
+				entero = rs.getBigDecimal("temperatura");
+				fraccion = entero.divide(new BigDecimal (10));
+				movimientoDieselDTO.setValor_total_temperatura(fraccion);
 				lista.add(movimientoDieselDTO);
 			}
 		}catch (SQLException e) {
