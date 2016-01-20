@@ -17,7 +17,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import ec.gob.iess.cuartomaquinas.db.ManejadorDiesel;
-import ec.gob.iess.cuartomaquinas.dto.ReplicacionConsumoDieselDTO;
 import ec.gob.iess.cuartomaquinas.dto.ReplicacionDatosDieselDTO;
 
 /**
