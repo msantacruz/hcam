@@ -41,7 +41,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" img src="images/logo%20IESS.png" width="52" height="98"/>
+                            <img alt="image" src="images/logo%20IESS.png" width="52" height="98"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">HCAM</strong>
@@ -177,11 +177,11 @@
 		           		}
                     	ManejadorDiesel manejadorDiesel = new ManejadorDiesel();
                     	List<MovimientoDieselDTO> lista= manejadorDiesel.buscarEstadisticaIngresos(Integer.parseInt(mes), Integer.parseInt(anio));
-                    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    	SimpleDateFormat formatSegundos = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     	for(MovimientoDieselDTO diesel: lista) {
                     %>    
                     <tr>
-                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= formatSegundos.format(diesel.getFecha()) %></td>
                         <td><%= diesel.getValor_total_entrada() %> GALONES</td>
                         <td><%= diesel.getValor_flujo_entrada() %> GPM</td>
                         <td><%= diesel.getValor_total_temperatura()  %> &#176; C</td>
@@ -234,7 +234,7 @@
                     	for(MovimientoDieselDTO diesel: lista) {
                     %>    
                     <tr>
-                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= formatSegundos.format(diesel.getFecha()) %></td>
                         <td><%= diesel.getValor_total_salida() %> GALONES</td>
                         <td><%= diesel.getValor_flujo_salida() %> GPM</td>
                         <td><% if (diesel.getTanque_uso() == 1 ) out.println("Tanque 1"); else out.println("Tanque 2");%></td>
@@ -286,7 +286,7 @@
                     	for(MovimientoDieselDTO diesel: lista) {
                     %>    
                     <tr>
-                        <td><%= format.format(diesel.getFecha()) %></td>
+                        <td><%= formatSegundos.format(diesel.getFecha()) %></td>
                         <td><%= diesel.getValor_total_tanque1() %> GALONES</td>
                         <td><%= diesel.getValor_total_tanque2() %> GALONES</td>
                         <td><%= diesel.getValor_total_acumulado() %> GALONES</td>
