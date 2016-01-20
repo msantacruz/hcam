@@ -164,14 +164,14 @@ public class ManejadorAgua {
 					.prepareStatement("INSERT INTO consumo_agua(id, fecha, consumo)"
 							+ " VALUES (?, ?, ?)");
 			psUpdate = conn
-					.prepareStatement("update consumo_agua set id=?, fecha=?, consumo=?");
+					.prepareStatement("update consumo_agua set fecha=?, consumo=? where id=?");
 			for(ReplicacionConsumoAguaDTO replicAgua: lista) {
 				psVerificacion.setLong(1, replicAgua.getId());
 				rs = psVerificacion.executeQuery();
 				if (rs.next()) {
-					psUpdate.setLong(1, replicAgua.getId());
-					psUpdate.setTimestamp(2, new Timestamp(replicAgua.getFecha().getTime()));
-					psUpdate.setBigDecimal(3, replicAgua.getConsumo());
+					psUpdate.setLong(3, replicAgua.getId());
+					psUpdate.setTimestamp(1, new Timestamp(replicAgua.getFecha().getTime()));
+					psUpdate.setBigDecimal(2, replicAgua.getConsumo());
 					psUpdate.executeUpdate();	
 				} else {
 					ps.setLong(1, replicAgua.getId());
@@ -216,14 +216,14 @@ public class ManejadorAgua {
 					.prepareStatement("INSERT INTO consumo_mes_agua(id, fecha, consumo_total_mes)"
 							+ " VALUES (?, ?, ?)");
 			psUpdate = conn
-					.prepareStatement("update consumo_mes_agua set id=?, fecha=?, consumo_total_mes=?");
+					.prepareStatement("update consumo_mes_agua set fecha=?, consumo_total_mes=? where id=?");
 			for(ReplicacionConsumoAguaDTO replicAgua: lista) {
 				psVerificacion.setLong(1, replicAgua.getId());
 				rs = psVerificacion.executeQuery();
 				if (rs.next()) {
-					psUpdate.setLong(1, replicAgua.getId());
-					psUpdate.setTimestamp(2, new Timestamp(replicAgua.getFecha().getTime()));
-					psUpdate.setBigDecimal(3, replicAgua.getConsumo());
+					psUpdate.setLong(3, replicAgua.getId());
+					psUpdate.setTimestamp(1, new Timestamp(replicAgua.getFecha().getTime()));
+					psUpdate.setBigDecimal(2, replicAgua.getConsumo());
 					psUpdate.executeUpdate();
 				} else {
 					ps.setLong(1, replicAgua.getId());

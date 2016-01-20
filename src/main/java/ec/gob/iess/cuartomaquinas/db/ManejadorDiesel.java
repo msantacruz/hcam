@@ -113,7 +113,7 @@ public class ManejadorDiesel {
 		try{
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_ingreso = 10");
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_ingreso = 10 order by fecha");
 			ps.setInt(1, anio);
 			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
@@ -153,7 +153,7 @@ public class ManejadorDiesel {
 		try{
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_tdiario = 10");
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and bomba_tdiario = 10 order by fecha");
 			ps.setInt(1, anio);
 			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
@@ -189,7 +189,7 @@ public class ManejadorDiesel {
 		try{
 			conn = GestorConexion.obtenerConexion();
 			PreparedStatement ps = conn
-					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and (bajo_tanque1 = 10 or bajo_tanque2 = 10)");
+					.prepareStatement("select * from datos_plc_diesel where date_part('year',fecha) = ? and date_part('month',fecha) = ? and (bajo_tanque1 = 10 or bajo_tanque2 = 10) order by fecha");
 			ps.setInt(1, anio);
 			ps.setInt(2, mes);
 			ResultSet rs = ps.executeQuery();
@@ -245,14 +245,14 @@ public class ManejadorDiesel {
 					.prepareStatement("INSERT INTO consumo_diesel(id, fecha, consumo)"
 							+ " VALUES (?, ?, ?)");
 			psUpdate = conn
-					.prepareStatement("update consumo_diesel set id=?, fecha=?, consumo=?");
+					.prepareStatement("update consumo_diesel set fecha=?, consumo=? where id=?");
 			for(ReplicacionConsumoDieselDTO replicDiesel: lista) {
 				psVerificacion.setLong(1, replicDiesel.getId());
 				rs = psVerificacion.executeQuery();
 				if (rs.next()) {
-					psUpdate.setLong(1, replicDiesel.getId());
-					psUpdate.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
-					psUpdate.setBigDecimal(3, replicDiesel.getConsumo());
+					psUpdate.setLong(3, replicDiesel.getId());
+					psUpdate.setTimestamp(1, new Timestamp(replicDiesel.getFecha().getTime()));
+					psUpdate.setBigDecimal(2, replicDiesel.getConsumo());
 					psUpdate.executeUpdate();	
 				} else {
 					ps.setLong(1, replicDiesel.getId());
@@ -297,14 +297,14 @@ public class ManejadorDiesel {
 					.prepareStatement("INSERT INTO consumo_mes_diesel(id, fecha, consumo_total_mes)"
 							+ " VALUES (?, ?, ?)");
 			psUpdate = conn
-					.prepareStatement("update consumo_mes_diesel set id=?, fecha=?, consumo_total_mes=?");
+					.prepareStatement("update consumo_mes_diesel set fecha=?, consumo_total_mes=? where id=?");
 			for(ReplicacionConsumoDieselDTO replicDiesel: lista) {
 				psVerificacion.setLong(1, replicDiesel.getId());
 				rs = psVerificacion.executeQuery();
 				if (rs.next()) {
-					psUpdate.setLong(1, replicDiesel.getId());
-					psUpdate.setTimestamp(2, new Timestamp(replicDiesel.getFecha().getTime()));
-					psUpdate.setBigDecimal(3, replicDiesel.getConsumo());
+					psUpdate.setLong(3, replicDiesel.getId());
+					psUpdate.setTimestamp(1, new Timestamp(replicDiesel.getFecha().getTime()));
+					psUpdate.setBigDecimal(2, replicDiesel.getConsumo());
 					psUpdate.executeUpdate();
 				} else {
 					ps.setLong(1, replicDiesel.getId());
@@ -401,9 +401,13 @@ public class ManejadorDiesel {
 		
 		Connection conn = null;
 		PreparedStatement psInsert = null;
+		PreparedStatement psSelect = null;
+		ResultSet rs = null;
 		
 		try {
 			conn = GestorConexion.obtenerConexion();
+			psSelect = conn.prepareStatement("select * from datos_plc_diesel where id = ?");
+			
 			psInsert = conn.prepareStatement("INSERT INTO datos_plc_diesel(id, fecha, temperatura, bajo_tanque1, alto_tanque1, bajo_tanque2, "
 					+ "alto_tanque2, pulsos_entrada, bomba_ingreso, frecuencia_entrada,bomba_tdiario, galones_salida, fracc_galonsalida, frecuencia_salida, "
 					+ "flujo_salida, fracc_flujosalida, galones_entrada, fracc_galonentrada, flujo_entrada, fracc_flujoentrada, paro_emergencia, inicio_galont1, "
@@ -412,43 +416,48 @@ public class ManejadorDiesel {
 					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			for (ReplicacionDatosDieselDTO datosDiesel : lista) {
-				psInsert.setLong(1, datosDiesel.getId());
-				psInsert.setTimestamp(2, new Timestamp(datosDiesel.getFecha().getTime()));
-				psInsert.setInt(3, datosDiesel.getTemperatura());
-				psInsert.setInt(4, datosDiesel.getBajo_tanque1());
-				psInsert.setInt(5, datosDiesel.getAlto_tanque1());
-				psInsert.setInt(6, datosDiesel.getBajo_tanque2());
-				psInsert.setInt(7, datosDiesel.getAlto_tanque2());
-				psInsert.setDouble(8, datosDiesel.getPulsos_entrada());
-				psInsert.setInt(9, datosDiesel.getBomba_ingreso());
-				psInsert.setInt(10, datosDiesel.getFrecuencia_entrada());
-				psInsert.setInt(11, datosDiesel.getBomba_tdiario());
-				psInsert.setInt(12, datosDiesel.getGalones_salida());
-				psInsert.setInt(13, datosDiesel.getFracc_galonsalida());
-				psInsert.setInt(14, datosDiesel.getFrecuencia_salida());
-				psInsert.setInt(15, datosDiesel.getFlujo_salida());
-				psInsert.setInt(16, datosDiesel.getFracc_flujosalida());
-				psInsert.setInt(17, datosDiesel.getGalones_entrada());
-				psInsert.setInt(18, datosDiesel.getFracc_galonentrada());
-				psInsert.setInt(19, datosDiesel.getFlujo_entrada());
-				psInsert.setInt(20, datosDiesel.getFracc_flujoentrada());
-				psInsert.setInt(21, datosDiesel.getParo_emergencia());
-				psInsert.setInt(22, datosDiesel.getInicio_galont1());
-				psInsert.setInt(23, datosDiesel.getInicio_fraccgalont1());
-				psInsert.setInt(24, datosDiesel.getInicio_galont2());
-				psInsert.setInt(25, datosDiesel.getInicio_fraccgalont2());
-				psInsert.setInt(26, datosDiesel.getTotal_galont1());
-				psInsert.setInt(27, datosDiesel.getTotal_fraccgalont1());
-				psInsert.setInt(28, datosDiesel.getTotal_galont2());
-				psInsert.setInt(29, datosDiesel.getTotal_fraccgalont2());
-				psInsert.setInt(30, datosDiesel.getPedido_tanque());
-				psInsert.setInt(31, datosDiesel.getTanque_uso());
-				psInsert.setInt(32, datosDiesel.getModo());
-				psInsert.setInt(33, datosDiesel.getResetIngreso());
-				psInsert.setInt(34, datosDiesel.getConsumo());
-				psInsert.setInt(35, datosDiesel.getFraccConsumo());
+				psSelect.setLong(1, datosDiesel.getId());
+				rs = psSelect.executeQuery();
+				if (!rs.next()) {
+					psInsert.setLong(1, datosDiesel.getId());
+					psInsert.setTimestamp(2, new Timestamp(datosDiesel.getFecha().getTime()));
+					psInsert.setInt(3, datosDiesel.getTemperatura());
+					psInsert.setInt(4, datosDiesel.getBajo_tanque1());
+					psInsert.setInt(5, datosDiesel.getAlto_tanque1());
+					psInsert.setInt(6, datosDiesel.getBajo_tanque2());
+					psInsert.setInt(7, datosDiesel.getAlto_tanque2());
+					psInsert.setDouble(8, datosDiesel.getPulsos_entrada());
+					psInsert.setInt(9, datosDiesel.getBomba_ingreso());
+					psInsert.setInt(10, datosDiesel.getFrecuencia_entrada());
+					psInsert.setInt(11, datosDiesel.getBomba_tdiario());
+					psInsert.setInt(12, datosDiesel.getGalones_salida());
+					psInsert.setInt(13, datosDiesel.getFracc_galonsalida());
+					psInsert.setInt(14, datosDiesel.getFrecuencia_salida());
+					psInsert.setInt(15, datosDiesel.getFlujo_salida());
+					psInsert.setInt(16, datosDiesel.getFracc_flujosalida());
+					psInsert.setInt(17, datosDiesel.getGalones_entrada());
+					psInsert.setInt(18, datosDiesel.getFracc_galonentrada());
+					psInsert.setInt(19, datosDiesel.getFlujo_entrada());
+					psInsert.setInt(20, datosDiesel.getFracc_flujoentrada());
+					psInsert.setInt(21, datosDiesel.getParo_emergencia());
+					psInsert.setInt(22, datosDiesel.getInicio_galont1());
+					psInsert.setInt(23, datosDiesel.getInicio_fraccgalont1());
+					psInsert.setInt(24, datosDiesel.getInicio_galont2());
+					psInsert.setInt(25, datosDiesel.getInicio_fraccgalont2());
+					psInsert.setInt(26, datosDiesel.getTotal_galont1());
+					psInsert.setInt(27, datosDiesel.getTotal_fraccgalont1());
+					psInsert.setInt(28, datosDiesel.getTotal_galont2());
+					psInsert.setInt(29, datosDiesel.getTotal_fraccgalont2());
+					psInsert.setInt(30, datosDiesel.getPedido_tanque());
+					psInsert.setInt(31, datosDiesel.getTanque_uso());
+					psInsert.setInt(32, datosDiesel.getModo());
+					psInsert.setInt(33, datosDiesel.getResetIngreso());
+					psInsert.setInt(34, datosDiesel.getConsumo());
+					psInsert.setInt(35, datosDiesel.getFraccConsumo());
+					
+					psInsert.execute();
+				}
 				
-				psInsert.execute();
 			}
 			
 			return true;
@@ -457,8 +466,12 @@ public class ManejadorDiesel {
 			return false;
 		} finally {
 			try {
+				if (rs != null)
+					rs.close();
 				if (psInsert != null) 
 					psInsert.close();
+				if (psSelect != null)
+					psSelect.close();
 				if (conn != null)
 					conn.close();
 			} catch (SQLException e) { }
